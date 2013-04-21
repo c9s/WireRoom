@@ -29,6 +29,25 @@
   &:after
     clear: both
 
+.tabs
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+    margin-bottom: 10px
+    border-bottom: 1px solid #ccc
+    li
+      display: inline-block
+      padding: 0
+      margin: 0
+      a
+        display: block
+        border: 1px solid #ccc
+        border-radius: 10px 10px 0 0
+        padding: 5px 10px
+        background: #fff
+
+
 body
   font-color #333
   text-shadow #fff
@@ -57,6 +76,8 @@ a:hover
 @-webkit-keyframes fadeInEffect
   from { opacity: 0; }
   to   { opacity: 1; }
+
+
 
 #nicknameInput
   font-weight bold

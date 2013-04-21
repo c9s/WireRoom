@@ -34,23 +34,33 @@
         </div>
         <div data-role="content">
 
-            <div id="channelTabs">
-                <div id="inputPanel" class="clearfix">
-                    <form method="post" id="messageForm" action="#">
-                        <div style="width: 20%; float: left;">
-                            <input id="nicknameInput" type="text" name="" value="Someone"/>
-                        </div>
+            <div id="channelTabs" class="tabs">
+                <ul>
+                    <li><a href="#hall">Hall</a></li>
+                    <li><a href="#channel2">Channel2</a></li>
+                </ul>
+                <div id="hall">
+                    <div id="inputPanel" class="clearfix">
 
-                        <div style="width: 50%; float: left; margin-left: 12px;">
-                            <input id="messageInput" type="text" name="message_body" value=""/>
-                        </div>
-                        <div style="float: left; margin-left: 12px;">
-                            <button style="margin: 0;" type="submit">Send</button>
-                        </div>
-                    </form>
+                        <form method="post" id="messageForm" action="#">
+                            <div style="width: 20%; float: left;">
+                                <input id="nicknameInput" type="text" name="" value="Someone"/>
+                            </div>
+
+                            <div style="width: 50%; float: left; margin-left: 12px;">
+                                <input id="messageInput" type="text" name="message_body" value=""/>
+                            </div>
+                            <div style="float: left; margin-left: 12px;">
+                                <button style="margin: 0;" type="submit">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="messageContainer">
+
+                    </div>
                 </div>
-                <div id="messageContainer">
 
+                <div id="channel2">
                 </div>
 
             </div>
