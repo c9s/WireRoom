@@ -118,6 +118,10 @@ class WireRoomChannelSearchInput
 
 class WireRoomMessageInput
   constructor: (@wireroom) ->
+
+    # construct the UI
+    template = ->
+
     @messageForm  = $("#messageForm")
     @messageInput = $("#messageInput")
     @nicknameInput = $("#nicknameInput")
