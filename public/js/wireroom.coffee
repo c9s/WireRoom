@@ -110,17 +110,18 @@ class WireRoomConnectionStatus
       console.info("online")
 
 class WireRoomChannelSearchInput
-  constructor: (@wireroom) ->
-    @searchInput  = $("#channelSearch")
-    @searchInput.click (e) ->
-      channelName = $(this).val()
-
+  constructor: (@wireroom, @form) ->
+    self = this
+    @searchInput = @form.find('input')
+    @form.submit (e) ->
+      room = self.searchInput.val()
+      self.wireroom.joinChannel room
+      return false
 
 class WireRoomMessageInput
   constructor: (@wireroom) ->
-
     # construct the UI
-    template = ->
+    # template = ->
 
     @messageForm  = $("#messageForm")
     @messageInput = $("#messageInput")
@@ -177,7 +178,7 @@ class WireRoom
 
     console.info "Wireroom Started."
 
-    @rooms = @options.rooms or ["wireroom"]
+    @rooms = @options.rooms or ["Hall"]
 
     # XXX: we may use navigator.onLine status to reconnect,
     #      but we need to disable reconnect flag.
@@ -191,6 +192,7 @@ class WireRoom
 
     @plugins.status = new WireRoomConnectionStatus(this, $('#connectionStatus') )
     @plugins.messageInput = new WireRoomMessageInput(this)
+    @plugins.channelSearch = new WireRoomChannelSearchInput(this,$('#channelSearch'))
 
     @hasLogs = false
 
