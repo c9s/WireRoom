@@ -16,6 +16,7 @@
     "grunt-contrib-connect": "~0.1.0"
   },
   "dependencies": {
+    "coffee-script": "*",
     "console": "~0.4.9",
     "connect": "~2.7.1",
     "express": "~3.0.5",
