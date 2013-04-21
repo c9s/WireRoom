@@ -33,6 +33,9 @@
 .channel-search {
   float: right;
 }
+.tabs .tab-content {
+  position: relative;
+}
 .tabs ul {
   list-style: none;
   margin: 0;
@@ -58,6 +61,36 @@
 }
 .tabs ul li a.active {
   background: #fff;
+}
+.side-panel {
+  position: fixed;
+  right: -260px;
+  top: 40px;
+  bottom: 30px;
+  padding: 0;
+  width: 260px;
+  border-left: 1px solid #ccc;
+  background: #fff;
+  -webkit-transform: all;
+  -moz-transform: all;
+  -webkit-transition: right 0.8s;
+  -moz-transition: right 0.8s;
+}
+.side-panel.show {
+  right: 0px;
+  -webkit-transition: right 0.8s;
+  -moz-transition: right 0.8s;
+}
+.side-panel .handle {
+  position: relative;
+  top: 100px;
+  left: -38px;
+  width: 38px;
+  height: 30px;
+  -webkit-border-radius: 10px 0 0 10px;
+  -moz-border-radius: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
+  background: #ccc;
 }
 .input-panel .nickname-column {
   width: 20%;

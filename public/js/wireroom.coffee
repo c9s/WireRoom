@@ -1,5 +1,15 @@
 $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
+class WireRoomSidePanel
+  constructor: (@wireroom, @panel, @options) ->
+    template = ->
+      div class: "side-panel", ->
+        div class: "handle", ->
+    @el = $(CoffeeKup.render(template,{}))
+    @panel.append @el
+    @el.find('.handle').click (e) =>
+      @el.toggleClass('show')
+
 class WireRoomConnectionStatus
   constructor: (@wireroom,@el) ->
     @bind(@wireroom.socket)
@@ -191,6 +201,7 @@ class WireRoom
       messagePanelEl.addClass('message-container').appendTo($panel)
       messageContainer = new WireRoomMessageContainer(self, messagePanelEl, { room: room })
       messageInput     = new WireRoomMessageInput(self, $panel, { room: room })
+      sidePanel        = new WireRoomSidePanel(self, $panel, { room: room })
 
       @socket.emit "join",
         room: room

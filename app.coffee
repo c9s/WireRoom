@@ -170,7 +170,7 @@ class WireRoom
         data.timestamp = parseInt((new Date).getTime()/1000)
         if data.room
           console.log "Publish to #{data.room}: ", data
-          io.sockets.in(data.room).emit('says', data)
+          io.sockets.in(data.room).emit 'says', data
           # socket.broadcast.to(data.room).emit('says', data)
         else
           console.log "Publish globally", data

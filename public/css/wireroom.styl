@@ -33,6 +33,8 @@
   float: right
 
 .tabs
+  .tab-content
+    position relative
   ul
     list-style none
     margin 0
@@ -54,6 +56,31 @@
       a.active
         background: #fff
 
+.side-panel
+  position fixed
+  right -260px
+  top 40px
+  bottom 30px
+  padding 0
+  width 260px
+  border-left 1px solid #ccc
+  background #fff
+  -webkit-transform all
+  -moz-transform all
+  -webkit-transition right 0.8s
+  -moz-transition right 0.8s
+  &.show
+    right 0px
+    -webkit-transition right 0.8s
+    -moz-transition right 0.8s
+  .handle
+    position relative
+    top 100px
+    left -38px
+    width 38px
+    height 30px
+    border-radius 10px 0 0 10px
+    background #ccc
 
 .input-panel
   .nickname-column 
