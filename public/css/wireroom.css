@@ -71,6 +71,9 @@
   width: 260px;
   border-left: 1px solid #ccc;
   background: #fff;
+  -webkit-box-shadow: -3px 3px 3px #aaa;
+  -moz-box-shadow: -3px 3px 3px #aaa;
+  box-shadow: -3px 3px 3px #aaa;
   -webkit-transform: all;
   -moz-transform: all;
   -webkit-transition: right 0.8s;
@@ -90,7 +93,13 @@
   -webkit-border-radius: 10px 0 0 10px;
   -moz-border-radius: 10px 0 0 10px;
   border-radius: 10px 0 0 10px;
+  -webkit-box-shadow: -3px 3px 3px #aaa;
+  -moz-box-shadow: -3px 3px 3px #aaa;
+  box-shadow: -3px 3px 3px #aaa;
   background: #ccc;
+}
+.side-panel .handle:hover {
+  background: #ddd;
 }
 .input-panel .nickname-column {
   width: 20%;
