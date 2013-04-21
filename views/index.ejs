@@ -20,7 +20,6 @@
         <script src="/js/coffee-script.js"></script>
         <script src="/js/sha1.js"></script>
         <script src="/js/jquery.md5.js"></script>
-        <script src="/js/console.js"></script>
         <script src="/js/jquery.cookie.js"></script>
 
         <!-- include socket.io.js -->
@@ -35,38 +34,35 @@
         <div data-role="content">
             <div id="channelSearch" class="channel-search"><input type="text" placeholder="search channel here..."/></div>
 
+            <div id="inputPanel" class="clearfix">
+                <form method="post" id="messageForm" action="#">
+                    <div style="width: 20%; float: left;">
+                        <input id="nicknameInput" type="text" name="" value="Someone"/>
+                    </div>
+
+                    <div style="width: 50%; float: left; margin-left: 12px;">
+                        <input id="messageInput" type="text" name="message_body" value=""/>
+                    </div>
+                    <div style="float: left; margin-left: 12px;">
+                        <button style="margin: 0;" type="submit">Send</button>
+                    </div>
+                </form>
+            </div>
+
             <div id="channelTabs" class="tabs">
                 <ul class="tab-handle">
                     <li><a href="#hall">Hall</a></li>
-                    <li><a href="#channel2">Channel2</a></li>
                 </ul>
-
                 <div id="hall" class="tab-content">
-                    <div id="inputPanel" class="clearfix">
-
-                        <form method="post" id="messageForm" action="#">
-                            <div style="width: 20%; float: left;">
-                                <input id="nicknameInput" type="text" name="" value="Someone"/>
-                            </div>
-
-                            <div style="width: 50%; float: left; margin-left: 12px;">
-                                <input id="messageInput" type="text" name="message_body" value=""/>
-                            </div>
-                            <div style="float: left; margin-left: 12px;">
-                                <button style="margin: 0;" type="submit">Send</button>
-                            </div>
-                        </form>
-                    </div>
                     <div id="messageContainer">
 
                     </div>
                 </div>
-
-                <div id="channel2" class="tab-content">
-
-                </div>
-
             </div>
+
+
+
+
         </div>
 
         <div id="connectionStatus">Waiting for connection.</div>

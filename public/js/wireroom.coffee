@@ -174,6 +174,8 @@ class UITab
       panel.hide()
       self.el.trigger('addtab', panel)
 
+  hidePanels: -> @el.find('.tab-content').hide()
+
   addTab: (tabId, label, cb) ->
     ul = @el.find('ul')
     li = $('<li/>')
@@ -182,9 +184,15 @@ class UITab
     a.appendTo(li)
     li.appendTo(ul)
 
+
     panel = $('<div/>')
     panel.appendTo( @el ).addClass('tab-content')
     @tabPanels[ tabId ] = { handle: li, panel: panel, a: a }
+
+    a.click (e) =>
+      @hidePanels()
+      panel.show()
+
     cb panel if cb
 
   removeTab: (tabId) ->
