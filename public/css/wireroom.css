@@ -108,32 +108,32 @@ a:hover {
   background-color: #f0fdcd;
   border: 1px solid #ccc;
 }
-#messageContainer {
+.message-container {
   margin-top: 10px;
 }
-#messageContainer .action .nickname:after {
+.message-container .action .nickname:after {
   content: " ";
 }
-#messageContainer .action {
+.message-container .action {
   background: #ffe;
 }
-#messageContainer .nickname {
+.message-container .nickname {
   font-weight: bold;
 }
-#messageContainer .nickname:after {
+.message-container .nickname:after {
   content: ": ";
 }
-#messageContainer .avatar {
+.message-container .avatar {
   width: 26px;
   vertical-align: top;
 }
-#messageContainer .avatar img {
+.message-container .avatar img {
   width: 26px;
   height: 26px;
   vertical-align: top;
   margin-right: 0.5em;
 }
-#messageContainer p.message {
+.message-container p.message {
   padding: 3px 8px;
   margin: 0;
   border-bottom: 1px dotted #eee;
@@ -141,10 +141,10 @@ a:hover {
   -webkit-animation-name: fadeInEffect;
   -webkit-animation-duration: 0.8s;
 }
-#messageContainer .message .column {
+.message-container .message .column {
   margin-right: 0.5em;
 }
-#messageContainer time {
+.message-container time {
   color: #ccc;
   margin-right: 0.5em;
 }

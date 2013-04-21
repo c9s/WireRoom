@@ -36,8 +36,7 @@ Gravatar =
     return img
 
 class WireRoomMessageContainer
-  constructor: (@wireroom,@options) ->
-    @container = $("#messageContainer")
+  constructor: (@wireroom,@container,@options) ->
     @wireroom.socket.on "message.says", (x) =>
       $m = @buildMessage(x)
       @container.prepend($m)
@@ -229,7 +228,6 @@ class WireRoom
 
     @plugins.status = new WireRoomConnectionStatus(this, $('#connectionStatus') )
     @plugins.messageInput = new WireRoomMessageInput(this)
-    @plugins.messageContainer = new WireRoomMessageContainer(this)
 
     @hasLogs = false
 
@@ -268,12 +266,15 @@ class WireRoom
     self = this
 
     # create a new tab for the channel
-    @tabs.addTab room, room, (panel) =>
-      @socket.emit("join",{
+    @tabs.addTab room, room, ($panel) =>
+      messagePanelEl = $('<div/>')
+      messagePanelEl.addClass('message-container').appendTo($panel)
+      messageContainer = new WireRoomMessageContainer(self, messagePanelEl)
+
+      @socket.emit "join",
         room: room
         ident: self.Identifier
         nickname: self.plugins.messageInput.getNickname()
-      })
 
   leaveChannel: (channelName) ->
     self = this
