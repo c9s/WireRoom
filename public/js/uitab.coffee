@@ -11,11 +11,11 @@ class window.UITab
       panel.hide()
       self.el.trigger('addtab', [panel])
 
-  hidePanels: -> @panels.hide()
+  hidePanels: -> @panels().hide()
 
-  size: -> @panels.size()
+  size: -> @panels().size()
 
-  panels: -> @panels.find('.tab-content')
+  panels: -> @el.find('.tab-content')
 
   container: -> @el
 
@@ -37,8 +37,8 @@ class window.UITab
       tabId = $(this).data('tabId')
       self.activate(tabId)
       return false
-
     cb panel if cb
+    @activate tabId
 
   activate: (tabId) ->
     o = @tabPanels[ tabId ]
