@@ -84,6 +84,7 @@ class WireRoom
 
     @app.get "/", routes.index
     @app.get "/manifest.appcache", routes.appcache
+    @app.post "/channel/:channel", (req,res) -> console.info(req.params.payload)
 
     @server = http.createServer(@app)
 
