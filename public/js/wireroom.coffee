@@ -110,6 +110,13 @@ class WireRoomConnectionStatus
     u(window).on "online", (e) ->
       console.info("online")
 
+class WireRoomChannelSearchInput
+  constructor: (@wireroom) ->
+    @searchInput  = $("#channelSearch")
+    @searchInput.click (e) ->
+      channelName = $(this).val()
+
+
 class WireRoomMessageInput
   constructor: (@wireroom) ->
     @messageForm  = $("#messageForm")
@@ -156,6 +163,8 @@ class WireRoomMessageInput
 
 class WireRoom
   plugins: {}
+
+
   constructor: (@options) ->
 
     self = this
@@ -219,6 +228,22 @@ class WireRoom
 
     @socket.on "disconnect", =>
       console.warn "socket.io disconnected."
+
+  joinChannel: (channelName) ->
+    self = this
+    @socket.emit("join",{
+      room: channelName
+      ident: self.Identifier
+      nickname: self.plugins.messageInput.getNickname()
+    })
+
+  leaveChannel: (channelName) ->
+    self = this
+    @socket.emit "leave", {
+      roomt: channelName
+      ident: self.Identifier
+      nickname: self.plugins.messageInput.getNickname()
+    }
 
 u.ready ->
   wireroom = new WireRoom({})
