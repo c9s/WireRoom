@@ -58,11 +58,11 @@
 
 .side-panel
   position fixed
-  right -260px
+  width 300px
+  right -300px
   top 40px
   bottom 30px
   padding 0
-  width 260px
   border-left 1px solid #ccc
   background #fff
   box-shadow -3px 3px 3px #aaa
@@ -75,8 +75,8 @@
     -webkit-transition right 0.8s
     -moz-transition right 0.8s
   .handle
-    position relative
-    top 100px
+    position absolute
+    top 80px
     left -38px
     width 38px
     height 30px
@@ -87,6 +87,18 @@
     background #ddd
 
 .side-panel .notification-panel .git
+  padding 3px 5px
+  border-bottom 1px solid #ccc
+  .column
+    display inline-block
+    margin-right 3px
+  .hash
+    color #4183c4
+    // font-family Consolas, "Liberation Mono", Courier, monospace
+  .author
+    font-weight bold
+    
+
 .side-panel .notification-panel .jenkins
 
 .input-panel

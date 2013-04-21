@@ -130,6 +130,8 @@ class WireRoom
     @app.post "/=/git", (req,res) ->
       data = req.body
       io.sockets.in(data.room).emit("notification.git",data)
+      self.backlog.append(data.room, data)
+      res.send("success")
 
     @io.sockets.on "connection", (socket) =>
       console.log "A socket with sessionID " + socket.handshake.sessionID

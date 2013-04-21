@@ -21,6 +21,16 @@ class GitNotificationPanel
       div class: "notification-panel"
     @container = $(CoffeeKup.render(template,{}))
     @container.appendTo(@panel)
+
+    # pretty date updater
+
+    setInterval (=>
+      @container.find('.git').each (i,e) ->
+        t = $(this).data('time')
+        if t
+          $(this).find('.time').html( prettyDate(t) )
+    ), 1000
+
     @wireroom.socket.on "notification.git", (data) =>
       return if data.room != @options.room
       # create notification and append to the panel
@@ -28,14 +38,18 @@ class GitNotificationPanel
 
       console.log data
       commitTemplate = () ->
-        div class: "git", ->
-          span class: "author", -> @user
-          span class: "action", -> "push"
-          span class: "before", -> @before
-          span class: "after",  -> @after
-          span class: "count",  -> @commits.length
+        div class: "git clearfix", ->
+          span class: "column author", -> @user
+          span class: "column action", -> "pushed to"
+          span class: "column branch", -> @ref
+          span class: "column hash before", -> @before.substr(0,5)
+          span class: "column", -> "..."
+          span class: "column hash after",  -> @after.substr(0,5)
+          span class: "column count",  -> @commits.length
+          span class: "column time", -> prettyDate(@time)
       commitContent = $(CoffeeKup.render(commitTemplate, data))
       commitContent.appendTo(@container)
+      commitContent.data('time', data.time)
       ###
       data.after, data.before 
       data.commits @array

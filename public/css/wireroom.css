@@ -64,11 +64,11 @@
 }
 .side-panel {
   position: fixed;
-  right: -260px;
+  width: 300px;
+  right: -300px;
   top: 40px;
   bottom: 30px;
   padding: 0;
-  width: 260px;
   border-left: 1px solid #ccc;
   background: #fff;
   -webkit-box-shadow: -3px 3px 3px #aaa;
@@ -85,8 +85,8 @@
   -moz-transition: right 0.8s;
 }
 .side-panel .handle {
-  position: relative;
-  top: 100px;
+  position: absolute;
+  top: 80px;
   left: -38px;
   width: 38px;
   height: 30px;
@@ -101,20 +101,32 @@
 .side-panel .handle:hover {
   background: #ddd;
 }
-.side-panel .notification-panel .git .nickname-column,
+.side-panel .notification-panel .git {
+  padding: 3px 5px;
+  border-bottom: 1px solid #ccc;
+}
+.side-panel .notification-panel .git .column {
+  display: inline-block;
+  margin-right: 3px;
+}
+.side-panel .notification-panel .git .hash {
+  color: #4183c4;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+.side-panel .notification-panel .git .author {
+  font-weight: bold;
+}
 .side-panel .notification-panel .jenkins .nickname-column,
 .input-panel .nickname-column {
   width: 20%;
   float: left;
 }
-.side-panel .notification-panel .git .message-column,
 .side-panel .notification-panel .jenkins .message-column,
 .input-panel .message-column {
   width: 50%;
   float: left;
   margin-left: 12px;
 }
-.side-panel .notification-panel .git .submit-button,
 .side-panel .notification-panel .jenkins .submit-button,
 .input-panel .submit-button {
   float: left;

@@ -22,7 +22,5 @@ for ( 1..$cnt ) {
         type    => 'notification.git',
         payload => $payload,
     );
-    $msg->submit( 
-        url => 'http://localhost:3000/=/git',
-    );
+    $msg->submit( url => 'http://localhost:3000/=/git' );
 }
