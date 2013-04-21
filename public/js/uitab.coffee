@@ -16,6 +16,8 @@ class window.UITab
   container: -> @el
 
   addTab: (tabId, label, cb) ->
+    self = this
+
     ul = @el.find('ul')
     li = $('<li/>')
     a = $('<a/>').html(label).attr({ href: '#' + tabId })
@@ -27,10 +29,12 @@ class window.UITab
     panel.appendTo( @el ).addClass('tab-content')
     @tabPanels[ tabId ] = { handle: li, panel: panel, a: a }
 
-    a.click (e) =>
-      @hidePanels()
+    a.click (e) ->
+      self.hidePanels()
       panel.show()
-      @el.trigger('activatetab',[panel])
+      self.el.trigger('activatetab',[panel])
+      $(this).parent().find('.active').removeClass('active')
+      $(this).addClass('active')
       return false
 
     cb panel if cb

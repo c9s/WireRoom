@@ -55,6 +55,9 @@
   padding: 5px 10px;
   background: #e6e6e6;
 }
+.tabs ul li a.active {
+  background: #fff;
+}
 body {
   font-color: #333;
   text-shadow: #fff;
