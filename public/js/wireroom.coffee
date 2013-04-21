@@ -26,14 +26,16 @@ class GitNotificationPanel
       # create notification and append to the panel
       # handle git messages
 
-      commitTemplate = (payload) ->
+      console.log data
+      commitTemplate = () ->
         div class: "git", ->
-          span class: "author", -> payload.user
+          span class: "author", -> @user
           span class: "action", -> "push"
-          span class: "before", -> payload.before
-          span class: "after",  -> payload.after
-          span class: "count",  -> payload.commits.length
+          span class: "before", -> @before
+          span class: "after",  -> @after
+          span class: "count",  -> @commits.length
       commitContent = $(CoffeeKup.render(commitTemplate, data))
+      commitContent.appendTo(@container)
       ###
       data.after, data.before 
       data.commits @array

@@ -127,8 +127,9 @@ class WireRoom
 #        # accept the incoming connection
 #        accept(null, true)
     
-    @app.get "/=/git", (req,res) ->
-      console.log req.body
+    @app.post "/=/git", (req,res) ->
+      data = req.body
+      io.sockets.in(data.room).emit("notification.git",data)
 
     @io.sockets.on "connection", (socket) =>
       console.log "A socket with sessionID " + socket.handshake.sessionID

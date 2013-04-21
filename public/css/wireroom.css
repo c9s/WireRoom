@@ -101,15 +101,21 @@
 .side-panel .handle:hover {
   background: #ddd;
 }
+.side-panel .notification-panel .git .nickname-column,
+.side-panel .notification-panel .jenkins .nickname-column,
 .input-panel .nickname-column {
   width: 20%;
   float: left;
 }
+.side-panel .notification-panel .git .message-column,
+.side-panel .notification-panel .jenkins .message-column,
 .input-panel .message-column {
   width: 50%;
   float: left;
   margin-left: 12px;
 }
+.side-panel .notification-panel .git .submit-button,
+.side-panel .notification-panel .jenkins .submit-button,
 .input-panel .submit-button {
   float: left;
   margin-left: 12px;
