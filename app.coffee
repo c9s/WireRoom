@@ -106,7 +106,7 @@ class WireRoom
       "redisClient": @redisClient
     })
 
-    @io.set "log level", 3
+    @io.set "log level", 1
     @io.set "store", @redisStore
 
 #      @io.set "authorization",  (data, accept) ->

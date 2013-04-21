@@ -38,6 +38,7 @@ Gravatar =
 class WireRoomMessageContainer
   constructor: (@wireroom,@container,@options) ->
     @wireroom.socket.on "says", (x) =>
+      return if x.room != @options.room
       console.log "says", x
       $m = @buildMessage(x)
       @container.prepend($m)
