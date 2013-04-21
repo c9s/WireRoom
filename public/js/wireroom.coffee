@@ -165,7 +165,7 @@ class WireRoom
 
     console.info "Wireroom Started."
 
-    @rooms = @options.rooms or ["corneltek"]
+    @rooms = @options.rooms or ["wireroom"]
 
     # XXX: we may use navigator.onLine status to reconnect,
     #      but we need to disable reconnect flag.

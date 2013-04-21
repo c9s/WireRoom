@@ -8,5 +8,5 @@ git status | grep wireroom.min && (
 git push origin master
 
 # update remote server
-ssh git.corneltek.com "cd /home/wireroom/WireRoom; git pull --rebase origin master; " \
+ssh git.wireroom.com "cd /home/wireroom/WireRoom; git pull --rebase origin master; " \
             " git push origin master ; " && git pull --rebase origin master

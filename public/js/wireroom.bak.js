@@ -161,7 +161,7 @@ function fold_messages(s,cb)
 
         var $commits = $('<div/>').addClass('commits');
 
-        var cgit = new CGit( 'http://cgit.corneltek.com' );
+        var cgit = new CGit( 'http://cgit.wireroom.com' );
         var repo = x.repository.replace( /^\/.*\/git\/repositories\// , '' );
         var $repo   = $('<span/>').addClass('repository').html( cgit.getRepoLink(repo) );
         var $diff   = $('<span/>').addClass('diff').html( cgit.getDiffLink(repo,x.before,x.after) );

@@ -168,7 +168,7 @@ builder {
     };
 
     mount "/server-status" => Web::ApacheStatus->new( 
-                    url => 'http://corneltek.com/server-status',
+                    url => 'http://wireroom.com/server-status',
                     extended => 1 );
 
     if( $config->{backend}{plugins}{Jenkins} ) {
