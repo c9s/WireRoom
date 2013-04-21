@@ -36,7 +36,8 @@ class WireRoomBacklog
     queueName = if room then "queue-#{ room }" else "queue-broadcast"
     return @db.collection(queueName)
 
-  append: (room,data) ->
+  append: (room, type, data) ->
+    data.type = type
     queue = @queue(room)
     queue.insert(data)
 
@@ -130,7 +131,7 @@ class WireRoom
     @app.post "/=/git", (req,res) ->
       data = req.body
       io.sockets.in(data.room).emit("notification.git",data)
-      self.backlog.append(data.room, data)
+      self.backlog.append(data.room, "notification.git", data)
       res.send("success")
 
     @io.sockets.on "connection", (socket) =>
@@ -141,7 +142,7 @@ class WireRoom
         logs.toArray (err,list) ->
           list.reverse()
           for log in list
-            socket.emit("says",log)
+            socket.emit(log.type,log)
 
       socket.on "leave", (data) ->
         console.log "Leave", data
@@ -183,7 +184,7 @@ class WireRoom
           io.sockets.emit('says', data)
 
         # save message in backlog queue.
-        self.backlog.append(data.room,data)
+        self.backlog.append(data.room, "says",data)
 
       socket.on "disconnect", ->
         console.log "Disconnect"

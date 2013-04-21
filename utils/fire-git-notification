@@ -7,7 +7,7 @@ use HTTP::Request::Common;
 use JSON;
 my @names = qw(foo bar zoo);
 
-my $cnt = 1;
+my $cnt = 10;
 say "Posting commit log to " , $cnt;
 for ( 1..$cnt ) {
     my $rand = int(rand(20)) + 1;

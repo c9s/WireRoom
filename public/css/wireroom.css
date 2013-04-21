@@ -111,7 +111,6 @@
 }
 .side-panel .notification-panel .git .hash {
   color: #4183c4;
-  font-family: Consolas, "Liberation Mono", Courier, monospace;
 }
 .side-panel .notification-panel .git .author {
   font-weight: bold;
