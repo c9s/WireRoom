@@ -1,5 +1,6 @@
 <!doctype html>
-<html manifest="/manifest.appcache">
+<html>
+<!-- <html manifest="/manifest.appcache"> -->
     <head>
         <title>WireRoom</title>
         <meta charset="utf-8" />
@@ -34,12 +35,18 @@
         <div data-role="content">
 
             <div id="channelTabs">
-
-                <div id="inputPanel">
+                <div id="inputPanel" class="clearfix">
                     <form method="post" id="messageForm" action="#">
-                        <input data-mini="true" id="nicknameInput" type="text" size="8" name="" value="Someone"/>
-                        <input data-mini="true" id="messageInput" type="text" name="message_body" value=""/>
-                        <button data-mini="true" data-inline="true" type="submit">Send</button>
+                        <div style="width: 20%; float: left;">
+                            <input id="nicknameInput" type="text" name="" value="Someone"/>
+                        </div>
+
+                        <div style="width: 50%; float: left; margin-left: 12px;">
+                            <input id="messageInput" type="text" name="message_body" value=""/>
+                        </div>
+                        <div style="float: left; margin-left: 12px;">
+                            <button style="margin: 0;" type="submit">Send</button>
+                        </div>
                     </form>
                 </div>
                 <div id="messageContainer">

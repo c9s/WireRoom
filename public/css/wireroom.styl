@@ -1,5 +1,34 @@
 @import 'vendor'
 
+
+.grid-2p
+  float: left
+  width: 20%
+.grid-3p
+  float: left
+  width: 30%
+.grid-5p
+  float: left
+  width: 50%
+.grid-6p
+  float: left
+  width: 60%
+.grid-7p
+  float: left
+  width: 70%
+
+.clearfix
+  *zoom: 1
+  &:before,
+  &:after
+    display: table
+    content: ""
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0
+  &:after
+    clear: both
+
 body
   font-color #333
   text-shadow #fff
@@ -31,9 +60,6 @@ a:hover
 
 #nicknameInput
   font-weight bold
-
-#messageInput
-  padding-left: 0.5em
 
 #connectionStatus
   position fixed
