@@ -106,7 +106,7 @@ class WireRoom
       "redisClient": @redisClient
     })
 
-    @io.set "log level", 2
+    @io.set "log level", 3
     @io.set "store", @redisStore
 
 #      @io.set "authorization",  (data, accept) ->
@@ -135,19 +135,20 @@ class WireRoom
         logs.toArray (err,list) ->
           list.reverse()
           for log in list
-            socket.emit("message.says",log)
+            socket.emit("says",log)
 
       socket.on "leave", (data) ->
         console.log "Leave", data
+        return unless data.room
         socket.leave(data.room)
         self.redisClient.hdel("nicks-#{data.rooms}",socket.id)
         io.sockets.in(data.room).emit("leave",data)
 
       socket.on "join", (data) ->
         console.log "Join", data
+        return unless data.room
         socket.join(data.room)
         self.redisClient.hset("nicks-#{data.rooms}",socket.id,"1")
-
         io.sockets.in(data.room).emit("join",data)
 
         # get backlog from room backlog queue
@@ -164,13 +165,16 @@ class WireRoom
         # all rooms
         # io.sockets.manager.rooms
 
-      socket.on "message.publish", (data) ->
+      socket.on "publish", (data) ->
         # force update timestamp
         data.timestamp = parseInt((new Date).getTime()/1000)
         if data.room
-          io.sockets.in(data.room).emit('message.says', data)
+          console.log "Publish to #{data.room}: ", data
+          io.sockets.in(data.room).emit('says', data)
+          # socket.broadcast.to(data.room).emit('says', data)
         else
-          io.sockets.emit('message.says', data)
+          console.log "Publish globally", data
+          io.sockets.emit('says', data)
 
         # save message in backlog queue.
         self.backlog.append(data.room,data)

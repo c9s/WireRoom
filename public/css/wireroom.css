@@ -58,16 +58,16 @@
 .tabs ul li a.active {
   background: #fff;
 }
-#inputPanel .nickname-column {
+.input-panel .nickname-column {
   width: 20%;
   float: left;
 }
-#inputPanel .message-column {
+.input-panel .message-column {
   width: 50%;
   float: left;
   margin-left: 12px;
 }
-#inputPanel .submit-button {
+.input-panel .submit-button {
   float: left;
   margin-left: 12px;
 }
