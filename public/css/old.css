@@ -1,0 +1,185 @@
+/** 
+ * git commits notification item
+ */
+.git-commits-item { 
+    background: #f6f6f6;
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0px;
+    padding-left: 5px;
+    color: #333;
+    font-family: Monospace;
+    text-shadow: 1px 1px 1px #fff;
+}
+.git-commits-item .user { font-weight: bold; }
+.git-commits-item .ref { 
+    padding: 1px 3px;
+    background: -webkit-linear-gradient(top, #fdcd63, #ebbf5c);
+    border: 1px solid #cca550;
+    border-radius: 5px;
+}
+.git-commits-item .repo {
+    padding: 1px 3px;
+    background: -webkit-linear-gradient(top, #eee, #fff);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.git-commits-item .time {
+    float: right; 
+    margin-right: 5px;
+    margin-top: 1px;
+    font-size: 10px;
+    font-style: italic;
+    font-family: Helvetica;
+}
+
+
+/**
+ * when user hover his/her cursor on 
+ * git commits item, then shows preview 
+ */
+.git-commits-preview { 
+    position: fixed;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px 3px #ccc;
+}
+.git-commits-preview span.user { font-weight: bold; }
+.git-commits-preview span.repo { font-weight: bold; }
+
+.git-commits-preview span.before,
+.git-commits-preview span.after,
+.git-commits-preview span.ref { 
+    font-weight: bold; 
+    font-family: Monospace, Courier New;
+    font-size: 12px;
+}
+
+.git-commits-preview .commits { margin-left: 3px; }
+.git-commits-preview .commit { 
+    margin: 3px 0; 
+}
+.git-commits-preview .commit .id { 
+    float: left;
+    font-size: 12px;
+    font-weight: bold; 
+    font-family: Monospace, Courier New;
+    font-size: 12px;
+    margin-right: 3px;
+}
+.git-commits-preview .commit .author { 
+    font-size: 12px; float: left; 
+    margin-right: 3px;
+}
+.git-commits-preview .commit .message { 
+    font-size: 12px; float: left; 
+}
+
+#notifications .jenkins-item { 
+    background-color: #edfdb9;
+    position: relative;
+    padding: 5px;
+    padding-left: 32px;
+    border-bottom: 1px solid #ccc;
+}
+#notifications .jenkins-item img { 
+    position: absolute; 
+    left: 1px;
+    top: 2px;
+    margin:0; 
+    padding:0; 
+}
+
+#notifications .jenkins-item.finished {  }
+#notifications .jenkins-item.completed {  }
+#notifications .jenkins-item.started { background-color: #ddd; }
+
+#notifications .jenkins-item.success {  }
+#notifications .jenkins-item.failure {
+    color: #fff;
+
+
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-linear-gradient(bottom left, #FFD138 0%, #EF3124 100%);
+
+    /* Mozilla Firefox */ 
+    background-image: -moz-linear-gradient(bottom left, #FFD138 0%, #EF3124 100%);
+
+    /* Opera */ 
+    background-image: -o-linear-gradient(bottom left, #FFD138 0%, #EF3124 100%);
+
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(linear, left bottom, right top, color-stop(0, #FFD138), color-stop(1, #EF3124));
+
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-linear-gradient(bottom left, #FFD138 0%, #EF3124 100%);
+
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: linear-gradient(to top right, #FFD138 0%, #EF3124 100%);
+}
+
+
+.oembed-container img {
+    margin-top: 10px;
+    border:1px solid #ccc;
+    padding: 6px;
+    margin: 6px;
+    margin-left: 4%;
+}
+
+/**
+ * Git message styles
+ */
+#content .message.git {  }
+#content .message.git .commits { 
+    margin-left: 30px;
+}
+#content .message.git .commits .commit { 
+}
+#content .message.git .commit .id { margin: 3px; font-family: Monaco, Monospace, Courier New; font-size: 12px; }
+#content .message.git .commit .author { margin: 3px; }
+#content .message.git .commit .repository {  }
+#content .message.git .commit .message {  }
+#content .message.git .commit .message pre { display: inline; font-size: 12px; }
+#content .message.git .brief {
+    margin: 0 10px;
+    display: inline;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+#content .message.git .ref {
+    margin: 3px;
+    padding: 3px 5px;
+    border: 1px solid #cca550;
+    border-radius: 8px;
+    background: -webkit-linear-gradient(top, #fdcd63, #ebbf5c);
+}
+#content .message.git .brief pre { display: inline; }
+#content .message.git .diff { margin: 3px; }
+#content .message.git .more {
+    margin: 3px; font-weight: bold;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+#content .message.jenkins .status { border: 1px solid #ccc; color: #333; box-shadow: 1px 1px #ccc; border-radius: 5px; padding: 3px;  }
+#content .message.jenkins .status.success { background-color: #73df45; }
+#content .message.jenkins .status.failure { background-color: #df415f; color: #fff; text-shadow: 1px 1px #555; }
+#content .message.jenkins .status.unknown { background-color: #ddd; }
+#content .message.jenkins .phase { }
+#content .message.jenkins .job { }
+#content .message.jenkins .build { }
+
+.git-fold-text {
+    background-color: #DDD;
+    border-radius: 10px;
+    padding: 3px 10px;
+    text-align: center;
+    color: #666;
+    width: 250px;
+    margin: 0 auto;
+    display: block;
+}

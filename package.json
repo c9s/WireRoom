@@ -1,0 +1,41 @@
+{
+  "name": "wireroom",
+  "version": "0.0.1",
+  "description": "wireroom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.corneltek.com:WireRoom.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt-contrib-connect": "~0.1.0"
+  },
+  "dependencies": {
+    "console": "~0.4.9",
+    "connect": "~2.7.1",
+    "express": "~3.0.5",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-nodeunit": "~0.1.0",
+    "grunt-contrib-uglify": "~0.1.0",
+    "socket.io": "~0.9.13",
+    "ejs": "~0.8.3",
+    "http": "0.0.0",
+    "path": "~0.4.9",
+    "sync": "~0.2.1",
+    "stylus": "~0.31.0",
+    "js-yaml": "~1.0.3",
+    "mongodb": "~1.2.7",
+    "redis": "~0.8.2",
+    "hiredis": "~0.1.14",
+    "mongolian": "~0.1.18",
+    "wrench": "~1.4.4",
+    "glob": "~3.1.14",
+    "irc": "~0.3.5"
+  }
+}

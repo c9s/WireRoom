@@ -1,0 +1,2 @@
+server:
+	coffee app.coffee

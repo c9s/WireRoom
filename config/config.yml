@@ -1,0 +1,10 @@
+---
+frontend:
+backend:
+  auth:
+    username: admin
+    password: s3cr3t
+  plugins:
+    GitHub: 1
+    Jenkins: 1
+    ApacheStatus: 1

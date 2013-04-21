@@ -1,0 +1,35 @@
+#!/bin/bash
+CSS_FILES="
+public/css/wireroom.css"
+
+JS_FILES="public/js/jquery-1.7.1.min.js
+public/js/jquery.cookie.js
+public/js/jquery.ev.js
+public/js/jquery.oembed.js
+public/js/jquery.md5.js
+public/js/underscore.js
+public/js/backbone.js
+public/js/pretty.js
+public/js/sha1.js
+public/js/gravatar.js
+public/js/DUI.js
+public/js/Stream.js
+public/js/swfobject.js
+public/js/FABridge.js
+public/js/web_socket.js
+public/js/hippie.js
+public/js/hippie.pipe.js  
+public/js/mime_email.js
+public/js/window_title.js
+public/js/cgit.js
+public/js/notification_checker.js
+public/js/wireroom.js"
+
+# public/js/xdroom.bots.js"
+
+OUTPUT_JS_FILE=public/js/wireroom.min.js
+OUTPUT_CSS_FILE=public/css/wireroom.min.css
+echo "Compressing js..."
+cat $JS_FILES | java -jar utils/yuicompressor-2.4.7.jar --type js -o $OUTPUT_JS_FILE --charset utf-8
+echo "Compressing css..."
+cat $CSS_FILES | java -jar utils/yuicompressor-2.4.7.jar --type css -o $OUTPUT_CSS_FILE --charset utf-8

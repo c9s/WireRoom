@@ -1,0 +1,12 @@
+- use PocketIO to connect with front-end socket.io 
+
+- separate git functions.
+- rewrite js with coffeescript.
+- github hook support.
+- refactor logger.
+- mongodb logger.
+- name list command / update
+- websocket image upload
+- avatar upload
+- more image emoticons
+- <http://www.html5rocks.com/en/tutorials/>

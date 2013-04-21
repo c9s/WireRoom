@@ -1,0 +1,15 @@
+#!/usr/bin/env perl
+use lib 'lib';
+use LWP::UserAgent;
+use HTTP::Request::Common;
+use Git::Hook::PostReceive;
+use JSON;
+use WireRoom::Message;
+my $payload = Git::Hook::PostReceive->new->read_stdin( <STDIN> );
+
+my $msg = WireRoom::Message->new( 
+	type => 'git',
+	payload => $payload,
+);
+my $response = $msg->submit( host => 'hostname' , basic_auth => { user => 'admin' , pass => 's3cr3t' } );
+warn $response->decoded_content;

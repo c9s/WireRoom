@@ -1,0 +1,7 @@
+public/logs
+node_modules/
+
+# ignore files for perl module
+blib
+pm_to_blib
+inc

@@ -1,0 +1,87 @@
+@import 'vendor'
+
+body
+  font-color #333
+  text-shadow #fff
+  font-size 1em
+  font-family Helvetica, Arial, Sans-Serif
+  margin 0
+  padding 0
+  background-color #eee
+
+h1,h2,h3,h4,h5
+  margin 0
+  padding 0
+  font-family Helvetica, Arial, Sans-Serif
+
+form
+  margin 0 auto
+  padding 0
+
+a,
+a:link,
+a:visited
+  text-decoration none
+a:hover
+  text-decoration underline
+
+@-webkit-keyframes fadeInEffect
+  from { opacity: 0; }
+  to   { opacity: 1; }
+
+#nicknameInput
+  font-weight bold
+
+#messageInput
+  padding-left: 0.5em
+
+#connectionStatus
+  position fixed
+  bottom 3px
+  right 3px
+  padding 3px 8px
+  color #222
+  z-index 999
+  text-shadow 1px 1px #fff
+  background-color #f0fdcd
+  border 1px solid #ccc
+
+#messageContainer
+  margin-top 10px
+
+  .action .nickname:after
+    content " "
+
+  .action
+    background #ffe
+
+  .nickname
+    font-weight bold
+
+  .nickname:after
+    content ": "
+
+  .avatar
+    width: 26px
+    vertical-align: top
+    img
+      width: 26px 
+      height: 26px
+      vertical-align: top
+      margin-right: 0.5em
+
+  p.message
+    padding 3px 8px
+    margin 0
+    border-bottom 1px dotted #eee
+    line-height: 160%
+    -webkit-animation-name: fadeInEffect;
+    -webkit-animation-duration: 0.8s;
+
+  .message .column
+    margin-right: 0.5em;
+
+  time
+    color #ccc
+    margin-right 0.5em
+

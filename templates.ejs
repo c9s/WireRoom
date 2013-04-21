@@ -1,0 +1,61 @@
+
+        <!--
+        <script type="text/template" id="jenkins-item">
+            <img src="/images/jenkins/logo.png" height="24" align="left"/> 
+            <span class="jenkins">Jenkins</span>
+            <a target="_blank" class="job" href="<%= job.url %>"><%= job.name %></a>
+            <a class="build" target="_blank" href="<%= build.url %>">#<%= build.number %></a>
+            <span class="phase <%= phase.toLowerCase() %>"><%= phase.toCapitalCase() %></span>
+            <span class="status <%= status.toLowerCase() %>"><%= status.toCapitalCase() %></span>
+        </script>
+
+        <script type="text/template" id="git-commits-preview">
+
+            <span class="user"><%= typeof user != "undefined" ? user : 'Someone' %></span>++ 
+            
+            pushed to <span class="ref"><%= ref %></span> 
+            at <span class="repo"><%= repository_name %></span>
+
+            <div>
+                from <span class="before"><%= before ? before.substr(0,6) : "00000" %></span> 
+            </div>
+            <div>
+                to <span class="after"><%= after ? after.substr(0,6) : "00000" %></span>
+            </div>
+
+            <p>
+                <span class="commit-count"><%= commits.length %></span> commits:
+            </p>
+
+            <div class="commits">
+            <% _.each(commits, function(commit) { %>
+                <div class="commit">
+
+                    <div class="id">
+                        <%= commit.id.substr(0,6) %>
+                    </div>
+
+                    <div class="author">
+                        <%= commit.author.name %>++
+                    </div>
+
+                    <div class="message">
+                        <%= commit.message %>
+                    </div>
+
+                    <div style="clear:both;"> </div>
+                </div>
+            <% }); %>
+            </div>
+        </script>
+
+        <script type="text/template" id="git-commits-item">
+            <span class="user"><%= typeof user != "undefined" ? user : 'Someone' %></span>++
+            pushed to <span class="ref"><%= ref %></span>
+            at <span class="repo"><%= repository_name %></span>
+
+            <span class="count"><%= commits.length %></span> commits 
+            <div class="time" style=""><%= prettyDate(time) %></div>
+            <div style="clear:both;"/>
+        </script>
+        -->
