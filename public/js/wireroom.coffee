@@ -161,6 +161,39 @@ class WireRoomMessageInput
 
   getMessage: -> @messageInput.val()
 
+class UITab
+  tabPanels: { }
+
+  constructor: (@el) ->
+    self = this
+    @ul = @el.find('ul')
+    @ul.find('a').each (i,e) ->
+      selector = $(this).attr('href')
+      panel = self.el.find(selector)
+      panel.addClass('tab-content')
+      panel.hide()
+      self.el.trigger('addtab', panel)
+
+  addTab: (tabId, label, cb) ->
+    ul = @el.find('ul')
+    li = $('<li/>')
+    a = $('<a/>').html(label).attr({ href: '#' + tabId })
+    a.addClass('ui-link')
+    a.appendTo(li)
+    li.appendTo(ul)
+
+    panel = $('<div/>')
+    panel.appendTo( @el ).addClass('tab-content')
+    @tabPanels[ tabId ] = { handle: li, panel: panel, a: a }
+    cb panel if cb
+
+  removeTab: (tabId) ->
+    o = @tabPanels[ tabId ]
+    if o
+      o.handle.remove()
+      o.panel.remove()
+      delete(@tabPanels[tabId])
+
 class WireRoom
   plugins: {}
 
@@ -184,6 +217,8 @@ class WireRoom
       "max reconnection attempts": 10
     })
 
+    @tabs = new UITab($('#channelTabs'))
+
     @plugins.status = new WireRoomConnectionStatus(this, $('#connectionStatus') )
     @plugins.messageInput = new WireRoomMessageInput(this)
     @plugins.messageContainer = new WireRoomMessageContainer(this)
@@ -199,11 +234,7 @@ class WireRoom
     # 3. Closing the browser window will cause the event to be triggered. 
     # 4. Even a page reload will first create an unload event.
     $(window).bind "unload", () =>
-      @socket.emit "leave", {
-        roomt: room
-        ident: self.Identifier
-        nickname: self.plugins.messageInput.getNickname()
-      } for room in self.rooms
+      @leaveChannel(room) for room in self.rooms
 
     # a channel join event.
     @socket.on "join", (data) => console.log "join",data
@@ -213,11 +244,7 @@ class WireRoom
 
     @socket.on "connect", =>
       console.info "socket.io connected."
-      @socket.emit("join",{
-        room: room
-        ident: self.Identifier
-        nickname: self.plugins.messageInput.getNickname()
-      }) for room in self.rooms
+      @joinChannel(room) for room in self.rooms
 
       # if we don't have logs, we should ask backlog
       # XXX: see if we can get backlogs from a snapshot?
@@ -229,13 +256,16 @@ class WireRoom
     @socket.on "disconnect", =>
       console.warn "socket.io disconnected."
 
-  joinChannel: (channelName) ->
+  joinChannel: (room) ->
     self = this
-    @socket.emit("join",{
-      room: channelName
-      ident: self.Identifier
-      nickname: self.plugins.messageInput.getNickname()
-    })
+
+    # create a new tab for the channel
+    @tabs.addTab room, room, (panel) =>
+      @socket.emit("join",{
+        room: room
+        ident: self.Identifier
+        nickname: self.plugins.messageInput.getNickname()
+      })
 
   leaveChannel: (channelName) ->
     self = this
