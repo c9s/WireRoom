@@ -20,7 +20,7 @@ class window.UITab
 
     ul = @el.find('ul')
     li = $('<li/>')
-    a = $('<a/>').html(label).attr({ href: '#' + tabId })
+    a = $('<a/>').html(label).attr({ href: '#' + tabId }).data('tabId',tabId)
     a.addClass('ui-link')
     a.appendTo(li)
     li.appendTo(ul)
@@ -30,14 +30,20 @@ class window.UITab
     @tabPanels[ tabId ] = { handle: li, panel: panel, a: a }
 
     a.click (e) ->
-      self.hidePanels()
-      panel.show()
-      self.el.trigger('activatetab',[panel])
-      $(this).parent().find('.active').removeClass('active')
-      $(this).addClass('active')
+      tabId = $(this).data('tabId')
+      self.activate(tabId)
       return false
 
     cb panel if cb
+
+  activate: (tabId) ->
+    o = tabPanels[ tabId ]
+    if o
+      @hidePanels()
+      o.panel.show()
+      @el.trigger('activatetab',[o.panel])
+      @ul.find('.active').removeClass('active')
+      o.a.addClass('active')
 
   removeTab: (tabId) ->
     o = @tabPanels[ tabId ]
