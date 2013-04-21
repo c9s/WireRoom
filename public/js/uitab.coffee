@@ -13,6 +13,8 @@ class window.UITab
 
   hidePanels: -> @el.find('.tab-content').hide()
 
+  container: -> @el
+
   addTab: (tabId, label, cb) ->
     ul = @el.find('ul')
     li = $('<li/>')
