@@ -7,6 +7,7 @@ connect = require("connect")
 console = require("console")
 express = require("express")
 stylus  = require('stylus')
+github  = require('github')
 require("js-yaml")
 
 mongolian = require('mongolian')
