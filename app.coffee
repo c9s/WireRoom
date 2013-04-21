@@ -131,7 +131,7 @@ class WireRoom
       console.log "A socket with sessionID " + socket.handshake.sessionID
 
       socket.on "backlog", (data) ->
-        logs = self.backlog.ask(data.room,data.limit)
+        logs = self.backlog.ask(data.room ,data.limit)
         logs.toArray (err,list) ->
           list.reverse()
           for log in list

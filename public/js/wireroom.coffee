@@ -174,11 +174,10 @@ class WireRoom
 
       # if we don't have logs, we should ask backlog
       # XXX: see if we can get backlogs from a snapshot?
-      return if @socket.hasLogs
-
-      @socket.emit("backlog",{room: room, limit: 10})
-      # we've asked backlogs
-      @socket.hasLogs = true
+      # return if @socket.hasLogs
+      # @socket.emit("backlog",{room: room, limit: 10})
+      # # we've asked backlogs
+      # @socket.hasLogs = true
 
     @socket.on "disconnect", => console.warn "socket.io disconnected."
 
@@ -197,6 +196,7 @@ class WireRoom
         room: room
         ident: self.Identifier
         nickname: messageInput.getNickname()
+      @socket.emit "backlog",{room: room, limit: 10}
 
   leaveChannel: (channelName) ->
     self = this
