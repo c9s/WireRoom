@@ -126,6 +126,9 @@ class WireRoom
 #          return accept('No cookie transmitted.', false)
 #        # accept the incoming connection
 #        accept(null, true)
+    
+    @app.get "/=/git", (req,res) ->
+      console.log req.body
 
     @io.sockets.on "connection", (socket) =>
       console.log "A socket with sessionID " + socket.handshake.sessionID

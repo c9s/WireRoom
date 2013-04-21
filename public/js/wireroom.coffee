@@ -1,16 +1,66 @@
 $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
 class WireRoomSidePanel
+
+  ###
+  # @panel the main tab panel
+  ###
   constructor: (@wireroom, @panel, @options) ->
     template = ->
       div class: "side-panel", ->
         div class: "handle", ->
-    @el = $(CoffeeKup.render(template,{}))
-    @panel.append @el
-    @el.find('.handle').click (e) =>
-      @el.toggleClass('show')
+    @container = $(CoffeeKup.render(template,{}))
+    @panel.append @container
+    @container.find('.handle').click (e) =>
+      @container.toggleClass('show')
+
+
+class GitNotificationPanel
+  constructor: (@wireroom, @panel, @options) ->
+    template = ->
+      div class: "notification-panel"
+    @container = $(CoffeeKup.render(template,{}))
+    @container.appendTo(@panel)
+    @wireroom.socket.on "notification.git", (data) =>
+      return if data.room != @options.room
+      # create notification and append to the panel
+      # handle git messages
+
+      commitTemplate = (payload) ->
+        div class: "git", ->
+          span class: "author", -> payload.user
+          span class: "action", -> "push"
+          span class: "before", -> payload.before
+          span class: "after",  -> payload.after
+          span class: "count",  -> payload.commits.length
+      commitContent = $(CoffeeKup.render(commitTemplate, data))
+      ###
+      data.after, data.before 
+      data.commits @array
+          { 
+              id: [commit ref string],
+              author: {
+                  name: [string],
+                  email: [string]
+              },
+              date: [string],
+              merge: [optional] { parent1 => [commit ref string] , parent2 => [commit ref string] }
+          }
+      data.user pushed by {user}
+      data.ref (branch name or tag name)
+      data.ref_type (reference type: 'heads', 'tags')
+      data.type = 'git'
+      data.new_head = [boolean]  ? is a new tag or new branch ?
+      data.is_delete = [boolean] ? is deleted ?
+      data.time = [time string]
+      ###
+
 
 class WireRoomConnectionStatus
+
+  ###
+  # @el the connection status element
+  ###
   constructor: (@wireroom,@el) ->
     @bind(@wireroom.socket)
 
@@ -202,6 +252,8 @@ class WireRoom
       messageContainer = new WireRoomMessageContainer(self, messagePanelEl, { room: room })
       messageInput     = new WireRoomMessageInput(self, $panel, { room: room })
       sidePanel        = new WireRoomSidePanel(self, $panel, { room: room })
+
+      gitNotificationPanel = new GitNotificationPanel(self, sidePanel.container, { room: room })
 
       @socket.emit "join",
         room: room
