@@ -1,0 +1,28 @@
+#!/usr/bin/env perl
+use v5.12;
+use lib 'lib';
+use WireRoom::Message;
+use Git::Hook::PostReceive;
+use HTTP::Request::Common;
+use JSON;
+my @names = qw(foo bar zoo);
+
+my $cnt = 1;
+say "Posting commit log to " , $cnt;
+for ( 1..$cnt ) {
+    my $rand = int(rand(20)) + 1;
+    my $payload = Git::Hook::PostReceive->new->run( 
+        'HEAD',
+        'HEAD~' . $rand,
+        'refs/heads/master'
+    );
+    $payload->{user} = $names[ int rand 3 ];
+    $payload->{room} = "Hall";
+    my $msg = WireRoom::Message->new( 
+        type    => 'notification.git',
+        payload => $payload,
+    );
+    $msg->submit( 
+        url => 'http://localhost:3000/=/git',
+    );
+}
