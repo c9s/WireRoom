@@ -11,7 +11,11 @@ class window.UITab
       panel.hide()
       self.el.trigger('addtab', [panel])
 
-  hidePanels: -> @el.find('.tab-content').hide()
+  hidePanels: -> @panels.hide()
+
+  size: -> @panels.size()
+
+  panels: -> @panels.find('.tab-content')
 
   container: -> @el
 
@@ -37,7 +41,7 @@ class window.UITab
     cb panel if cb
 
   activate: (tabId) ->
-    o = tabPanels[ tabId ]
+    o = @tabPanels[ tabId ]
     if o
       @hidePanels()
       o.panel.show()
