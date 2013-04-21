@@ -196,7 +196,10 @@ class WireRoom
         nickname: self.plugins.messageInput.getNickname()
       } for room in self.rooms
 
+    # a channel join event.
     @socket.on "join", (data) => console.log "join",data
+
+    # a channel leaving event.
     @socket.on "leave", (data) => console.log "leave",data
 
     @socket.on "connect", =>
