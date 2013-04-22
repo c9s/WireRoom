@@ -14,6 +14,13 @@ class WireRoomSidePanel
     @container.find('.handle').click (e) =>
       @container.toggleClass('show')
 
+class SideDetailPanel
+  constructor: (@trigger, @options) ->
+    @popover = $('<div/>').html(@options.content)
+    @popover.css('width', 360)
+    @popover.css('left', @trigger.offset().left - 370 )
+    @popover.css('top', @trigger.offset().top - (@popover.height() / 2) )
+    $(document.body).append(@popover)
 
 class GitNotificationPanel
   constructor: (@wireroom, @panel, @options) ->
@@ -58,6 +65,7 @@ class GitNotificationPanel
                 span class: "column author", -> commit.author.name + " <#{ commit.author.email }> "
               div class: "message", -> commit.message
       commitDetailContent = $(CoffeeKup.render(commitDetailTemplate, data))
+
 
       ###
       commitContent.popover({
