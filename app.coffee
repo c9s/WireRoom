@@ -128,9 +128,10 @@ class WireRoom
 #        # accept the incoming connection
 #        accept(null, true)
     
+    # TODO: move this to GitNotificationService
     @app.post "/=/git", (req,res) ->
       data = req.body
-      io.sockets.in(data.room).emit("notification.git",data)
+      io.sockets.in(data.room).emit("notification.git", data)
       self.backlog.append(data.room, "notification.git", data)
       res.send("success")
 
