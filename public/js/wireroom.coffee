@@ -48,7 +48,7 @@ class GitNotificationPanel
           span class: "column count",  -> @commits.length
           span class: "column time", -> prettyDate(@time)
       commitContent = $(CoffeeKup.render(commitTemplate, data))
-      commitContent.appendTo(@container)
+      commitContent.prependTo(@container)
       commitContent.data('time', data.time)
       ###
       data.after, data.before 
