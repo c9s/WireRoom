@@ -22,7 +22,7 @@ has client =>
 has address =>
     is => 'rw';
 
-has time =>
+has timestamp =>
     is => 'rw',
     default => sub { time };
 
@@ -32,7 +32,7 @@ around BUILDARGS => sub {
     if( ref $_[0] ) {
         my $hashref = $_[0];
         my %args = (
-            (map { $_ => delete($hashref->{$_}) } grep { defined $hashref->{$_} } qw(type client address time)),
+            (map { $_ => delete($hashref->{$_}) } grep { defined $hashref->{$_} } qw(type client address timestamp)),
             payload => $hashref,
         );
         return $class->$orig( %args );
@@ -74,7 +74,7 @@ method submit (%options) {
 
 method to_hashref {
     my $msg = $->payload;
-    map { $msg->{ $_ } = $->$_ } qw(type client address time);
+    map { $msg->{ $_ } = $->$_ } qw(type client address timestamp);
     return $msg;
 };
 

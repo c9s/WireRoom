@@ -26,17 +26,15 @@ class GitNotificationPanel
 
     setInterval (=>
       @container.find('.git').each (i,e) ->
-        t = $(this).data('time')
+        t = $(this).data('timestamp')
         if t
-          $(this).find('.time').html( prettyDate(t) )
+          $(this).find('.timestamp').html( prettyDate(t) )
     ), 1000
 
     @wireroom.socket.on "notification.git", (data) =>
       return if data.room != @options.room
       # create notification and append to the panel
       # handle git messages
-
-      console.log data
       commitTemplate = () ->
         div class: "git clearfix", ->
           span class: "column author", -> @user
@@ -46,10 +44,35 @@ class GitNotificationPanel
           span class: "column", -> "..."
           span class: "column hash after",  -> @after.substr(0,5)
           span class: "column count",  -> @commits.length
-          span class: "column time", -> prettyDate(@time)
+          span class: "column time", -> prettyDate(@timestamp)
       commitContent = $(CoffeeKup.render(commitTemplate, data))
       commitContent.prependTo(@container)
-      commitContent.data('time', data.time)
+      commitContent.data('timestamp', data.timestamp)
+
+      commitDetailTemplate = ->
+        div class: "commits" ,->
+          for commit in @commits
+            div class: "commit", ->
+              div class: "meta clearfix", ->
+                span class: "column id", -> commit.id.substr(0,5)
+                span class: "column author", -> commit.author.name + " <#{ commit.author.email }> "
+              div class: "message", -> commit.message
+      commitDetailContent = $(CoffeeKup.render(commitDetailTemplate, data))
+
+      ###
+      commitContent.popover({
+        title: "Commit Details"
+        content: () -> $('<div/>').html(commitDetailContent).html()
+        trigger: "click"
+        html: true
+        delay:
+          show: 200
+          hide: 200
+        container: "body"
+        placement: "left"
+      })
+      ###
+
       ###
       data.after, data.before 
       data.commits @array
