@@ -296,10 +296,9 @@ class WireRoom
       # create new message panel
       messagePanelEl   = $('<div/>')
       messagePanelEl.addClass('message-container').appendTo($panel)
-      messageContainer = new WireRoomMessageContainer(self, messagePanelEl, { room: room })
-      messageInput     = new WireRoomMessageInput(self, $panel, { room: room })
-      sidePanel        = new WireRoomSidePanel(self, $panel, { room: room })
-
+      messageContainer     = new WireRoomMessageContainer(self, messagePanelEl, { room: room })
+      messageInput         = new WireRoomMessageInput(self, $panel, { room: room })
+      sidePanel            = new WireRoomSidePanel(self, $panel, { room: room })
       gitNotificationPanel = new GitNotificationPanel(self, sidePanel.container, { room: room })
 
       @socket.emit "join",
