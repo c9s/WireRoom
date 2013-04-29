@@ -131,6 +131,8 @@ class WireRoom
     # TODO: move this to GitNotificationService
     @app.post "/=/git", (req,res) ->
       data = req.body
+      return res.send(".room is required.") unless data.room
+
       io.sockets.in(data.room).emit("notification.git", data)
       self.backlog.append(data.room, "notification.git", data)
       res.send("success")
