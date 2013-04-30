@@ -132,7 +132,7 @@ class WireRoom
     payloadForwarder = (mountPath, toMessageType, enableBacklog) =>
       @app.post mountPath, (req,res) ->
         if req.body and req.body.payload
-          data = JSON.parse data.payload
+          data = JSON.parse req.body.payload
         else
           data = req.body
         data.room = req.params.room if req.params.room
