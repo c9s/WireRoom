@@ -29,10 +29,19 @@ window.githubCommitTemplate = () ->
       a href: "http://github.com/" + @pusher.name, target: "_blank", ->
         @pusher.name
     span class: "column action", -> "pushed to"
-    span class: "column branch", -> @ref.replace("refs/heads/", "")
-    span class: "column hash before", -> @before.substr(0,5)
-    span class: "column", -> "to"
-    span class: "column hash after",  -> @after.substr(0,5)
+    span class: "column branch", ->
+      branchName = @ref.replace("refs/heads/", "")
+      a href: @repository.url + "/tree/" + branchName, target: "_blank", ->
+        branchName
+    span class: "column", -> "at"
+    span class: "column repo", ->
+      a href: @repository.url, target: "_blank", ->
+        @repository.name
+    span class: "column compare", ->
+      a href: @compare, target: "_blank", ->
+        span class: "hash before", -> @before.substr(0,5)
+        span "..."
+        span class: "hash after",  -> @after.substr(0,5)
     span class: "column count",  -> @commits.length
     time class: "column time", -> prettyDate(@timestamp)
     # "compare" (compare link)
