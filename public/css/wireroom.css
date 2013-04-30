@@ -1,3 +1,9 @@
+.popover {
+  width: 420px;
+}
+.popover .title {
+  font-size: 12px;
+}
 body {
   font-color: #333;
   text-shadow: #fff;
@@ -165,18 +171,23 @@ a:hover {
 .side-panel .notification-panel .git .time {
   font-size: 10px;
 }
-.side-panel .notification-panel .jenkins .nickname-column,
+.side-panel .notification-panel .jenkins .commit .meta,
+.detail-content .commit .meta {
+  font-weight: bold;
+}
+.side-panel .notification-panel .jenkins .commit .message,
+.detail-content .commit .message {
+  font-family: Monospace;
+}
 .input-panel .nickname-column {
   width: 20%;
   float: left;
 }
-.side-panel .notification-panel .jenkins .message-column,
 .input-panel .message-column {
   width: 50%;
   float: left;
   margin-left: 12px;
 }
-.side-panel .notification-panel .jenkins .submit-button,
 .input-panel .submit-button {
   float: left;
   margin-left: 12px;

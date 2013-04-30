@@ -1,5 +1,7 @@
 $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
+String::toCapitalCase = -> @charAt(0).toUpperCase() + this.slice(1).toLowerCase()
+
 jenkinsMessageTemplate = () ->
   div class: "jenkins message clearfix", ->
     span class: "column icon", ->
@@ -9,10 +11,8 @@ jenkinsMessageTemplate = () ->
       a target: "_blank", href: @job.url, -> @job.name
     span class: "column build", ->
       a target: "_blank", href: @build.url, -> @job.number
-    span class: "column phase #{ @phase.toLowerCase() }", ->
-      @phase.toCapitalCase()
-    span class: "column status #{ @status.toLowerCase() }", ->
-      @status.toCapitalCase()
+    span class: "column phase #{ @phase.toLowerCase() }", -> @phase.toCapitalCase()
+    span class: "column status #{ @status.toLowerCase() }", -> @status.toCapitalCase()
 
 githubCommitTemplate = () ->
   div class: "github message clearfix", ->
@@ -49,14 +49,16 @@ gitCommitTemplate = () ->
     span class: "column count",  -> @commits.length
     time class: "column time", -> prettyDate(@timestamp)
 
-githubCommitDetailTemplate = ->
-  div class: "commits" ,->
-    for commit in @commits
-      div class: "commit", ->
-        div class: "meta clearfix", ->
-          span class: "column id", -> commit.id.substr(0,5)
-          span class: "column author", -> commit.author.name + " <#{ commit.author.email }> "
-        div class: "message", -> commit.message
+gitCommitDetailTemplate = ->
+  div ->
+    div class: "detail-content git", ->
+      div class: "commits" ,->
+        for commit in @commits
+          div class: "commit", ->
+            div class: "meta clearfix", ->
+              span class: "column id", -> commit.id.substr(0,5)
+              span class: "column author", -> commit.author.name + " <#{ commit.author.email }> "
+            div class: "message", -> commit.message
 
 
 
@@ -121,7 +123,7 @@ class NotificationPanel
       commitContent = $(CoffeeKup.render(githubCommitTemplate, data))
       commitContent.prependTo(@container)
         .data('timestamp', data.timestamp)
-        # commitDetailContent = $(CoffeeKup.render(commitDetailTemplate, data))
+        # commitDetailContent = $(CoffeeKup.render(gitCommitDetailTemplate, data))
 
     @wireroom.socket.on "notification.git", (data) =>
       return if data.room != @options.room
@@ -130,7 +132,18 @@ class NotificationPanel
       commitContent = $(CoffeeKup.render(gitCommitTemplate, data))
       commitContent.prependTo(@container)
         .data('timestamp', data.timestamp)
-        # commitDetailContent = $(CoffeeKup.render(commitDetailTemplate, data))
+
+      commitDetailContent = $(CoffeeKup.render(gitCommitDetailTemplate, data))
+
+      # popover
+      commitContent.popover
+        title:   "Title"
+        content: commitDetailContent
+        position: "left"
+        trigger: "hover"
+
+
+
 
       ###
       commitContent.popover({
