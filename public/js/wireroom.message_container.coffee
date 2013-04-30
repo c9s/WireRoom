@@ -21,7 +21,11 @@ class window.WireRoomMessageContainer
 
     $img = Gravatar.getImage( x.avatar )
     $avatar = $('<span/>').addClass('avatar').append( $img )
-    $m.prepend('<span class="nickname">' + x.nickname + '</span>')
+
+    $nick = $('<span class="nickname"/>')
+    $nick.text( x.nickname )
+
+    $m.prepend( $nick )
       .prepend( $avatar )
       .prepend('<time>' + x.time + '</time>')
     return $m
