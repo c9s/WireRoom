@@ -1,6 +1,13 @@
 .popover {
   width: 420px;
 }
+.popover h1,
+.popover h2,
+.popover h3,
+.popover h4,
+.popover h5 {
+  margin-bottom: 10px;
+}
 .popover .title {
   font-size: 12px;
 }
@@ -18,9 +25,9 @@ h2,
 h3,
 h4,
 h5 {
+  font-family: Helvetica, Arial, Sans-Serif;
   margin: 0;
   padding: 0;
-  font-family: Helvetica, Arial, Sans-Serif;
 }
 form {
   margin: 0 auto;

@@ -2,9 +2,7 @@ $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
 String::toCapitalCase = -> @charAt(0).toUpperCase() + this.slice(1).toLowerCase()
 
-
 class WRSidePanel
-
   ###
   # @panel the main tab panel
   ###

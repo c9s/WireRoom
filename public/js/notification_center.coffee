@@ -10,15 +10,14 @@ window.NotificationCenter =
           that.enableNotification -> # callback
         else if e.target.value is "off"
           that.disableNotification -> # callback
-      $("#notification-feature").show()  if allowed
+      $("#notification-feature").show() if allowed
     ifNotSupport = () ->
       $("#notification-feature").remove()
-
     NotificationChecker.check ifSupport, ifNotSupport
 
-    $(document.body).bind "wireroom-message-says", (e, message_data, $m) ->
-      return if new Date() - WireRoom.BOOT_TIME < 3000 or that.Settings.disableNotification or message_data.client is WireRoom.IDENTIFIER
-      that.showNotification "/images/opmsg48x48.jpg", message_data.nickname + " says", message_data.html
+    $(document.body).bind "wireroom-message-says", (e, messageData, $m) ->
+      return if new Date() - WireRoom.BOOT_TIME < 3000 or that.Settings.disableNotification or messageData.client is WireRoom.IDENTIFIER
+      that.showNotification "/images/opmsg48x48.jpg", messageData.nickname + " says", messageData.html
 
   enableNotification: (cb) ->
     return unless window.webkitNotifications
