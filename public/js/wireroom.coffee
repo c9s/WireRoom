@@ -182,7 +182,7 @@ class WireRoom
         room: room
         ident: self.Identifier
         nickname: messageInput.getNickname()
-      @socket.emit "backlog",{room: room, limit: 10}
+      @socket.emit "backlog",{room: room, limit: 50}
 
   leaveChannel: (channelName) ->
     self = this
