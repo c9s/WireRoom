@@ -4,7 +4,6 @@ class window.WRNotificationCenter
     disableNotification: false
 
   constructor: (@wireroom, @options) ->
-    that = this
     ifSupport = (allowed) =>
       console.log "Notification is supported."
       # $("#window-notification").bind "change", (e) ->
@@ -13,7 +12,6 @@ class window.WRNotificationCenter
       #   else if e.target.value is "off"
       #     @disableNotification()
       @wireroom.socket.on "says", (message) =>
-        console.log "notification", message
         return if new Date() - @wireroom.BootTime < 3000 or @settings.disableNotification or
           message.ident is @wireroom.Identifier
         @showNotification "/images/opmsg48x48.jpg", message.nickname + " says", message.message
@@ -39,21 +37,14 @@ class window.WRNotificationCenter
           ), 3000
         x.show()
 
-
-window.NotificationCenter =
-  create: ->
-    that = this
-
   enableNotification: (cb) ->
     return unless window.webkitNotifications
-    that = this
     permission = window.webkitNotifications.checkPermission()
     unless permission is 0
-      window.webkitNotifications.requestPermission ->
-        that.settings.disableNotification = false
+      window.webkitNotifications.requestPermission =>
+        @settings.disableNotification = false
         cb() if $.isFunction(cb)
     else
-      that.settings.disableNotification = false
+      @settings.disableNotification = false
       cb()  if $.isFunction(cb)
     false
-
