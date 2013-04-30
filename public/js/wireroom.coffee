@@ -164,8 +164,12 @@ class WireRoom
 
     notificationCenter = new WRNotificationCenter(self)
 
+  _joined: {}
+
   joinChannel: (room) ->
     self = this
+    return if _joined[ room ]
+    _joined[ room ] = true
 
 
     # create a new tab for the channel
