@@ -135,6 +135,7 @@ class WireRoom
           data = JSON.parse req.body.payload
         else
           data = req.body
+        data.timestamp = parseInt((new Date).getTime()/1000)
         data.room = req.params.room if req.params.room
         return res.send(".room is required.") unless data.room
         io.sockets.in(data.room).emit( toMessageType, data)
