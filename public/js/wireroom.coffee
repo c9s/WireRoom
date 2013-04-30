@@ -1,5 +1,19 @@
 $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
+jenkinsMessageTemplate = () ->
+  div class: "github message clearfix", ->
+    span class: "column icon", ->
+      span class: "icon icon-cogs", ->
+    span class: "column author", -> "Jenkins"
+    span class: "column job", ->
+      a target: "_blank", href: @job.url, -> @job.name
+    span class: "column build", ->
+      a target: "_blank", href: @build.url, -> @job.number
+    span class: "column phase #{ @phase.toLowerCase() }", ->
+      @phase.toCapitalCase()
+    span class: "column status #{ @status.toLowerCase() }", ->
+      @status.toCapitalCase()
+
 githubCommitTemplate = () ->
   div class: "github message clearfix", ->
     span class: "column icon", ->
