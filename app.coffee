@@ -131,7 +131,10 @@ class WireRoom
     # TODO: move this to GitNotificationService
     payloadForwarder = (mountPath, toMessageType, enableBacklog) =>
       @app.post mountPath, (req,res) ->
-        data = req.body
+        if req.body and req.body.payload
+          data = JSON.parse data.payload
+        else
+          data = req.body
         data.room = req.params.room if req.params.room
         return res.send(".room is required.") unless data.room
         io.sockets.in(data.room).emit( toMessageType, data)
