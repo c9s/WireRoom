@@ -225,17 +225,28 @@ a:hover {
 .message-container {
   margin-top: 10px;
 }
-.message-container .action .nickname:after {
-  content: " ";
+.message-container p {
+  padding: 3px 8px;
+  margin: 0;
+  border-bottom: 1px dotted #eee;
+  line-height: 160%;
+  -webkit-animation-name: fadeInEffect;
+  -webkit-animation-duration: 0.8s;
+}
+.message-container .action .verb {
+  display: inline-block;
+  margin: 0 2px;
+}
+.message-container .action .target {
+  font-weight: bold;
 }
 .message-container .action {
   background: #ffe;
 }
 .message-container .nickname {
+  display: inline-block;
   font-weight: bold;
-}
-.message-container .nickname:after {
-  content: ": ";
+  margin: 0 2px;
 }
 .message-container .avatar {
   width: 26px;
@@ -246,14 +257,6 @@ a:hover {
   height: 26px;
   vertical-align: top;
   margin-right: 0.5em;
-}
-.message-container p.message {
-  padding: 3px 8px;
-  margin: 0;
-  border-bottom: 1px dotted #eee;
-  line-height: 160%;
-  -webkit-animation-name: fadeInEffect;
-  -webkit-animation-duration: 0.8s;
 }
 .message-container .message .column {
   margin-right: 0.5em;

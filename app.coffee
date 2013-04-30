@@ -179,6 +179,15 @@ class WireRoom
 
         # all rooms
         # io.sockets.manager.rooms
+      socket.on "action", (data) ->
+        # force update timestamp
+        data.timestamp = parseInt((new Date).getTime()/1000)
+        if data.room
+          io.sockets.in(data.room).emit "action", data
+        else
+          io.sockets.emit("action", data)
+        # save message in backlog queue.
+        self.backlog.append(data.room, "action",data)
 
       socket.on "publish", (data) ->
         # force update timestamp

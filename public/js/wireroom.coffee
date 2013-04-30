@@ -1,6 +1,6 @@
 $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
-String::toCapitalCase = -> @charAt(0).toUpperCase() + this.slice(1).toLowerCase()
+String::toCapitalCase = -> @charAt(0).toUpperCase() + @slice(1).toLowerCase()
 
 class WRSidePanel
   ###
@@ -60,12 +60,24 @@ class WRMessageInput
     # load nickname from cookie
     if n = $.cookie("wireroom_nickname")
       @nicknameInput.val(n)
-
-    @nicknameInput.change (e) ->
-      # save nickname
-      $.cookie("wireroom_nickname", $(@).val() , { path: '/', expires: 365 })
+      @nickname = n
+    else
+      @nickname = "Someone"
 
     self = this
+
+    @nicknameInput.change (e) ->
+      self.origNickname = self.nickname
+      self.nickname = $(this).val()
+      $.cookie("wireroom_nickname", self.nickname , { path: '/', expires: 365 })
+      # TODO: send nickname change event
+      self.wireroom.socket.emit "action",
+        "nickname": self.origNickname
+        "verb":   "renamed to"
+        "target": self.nickname
+        "ident": self.wireroom.Identifier
+        "room": self.options.room
+
 
     @wireroom.socket.on "connect",    => @enable()
     @wireroom.socket.on "disconnect", => @disable()

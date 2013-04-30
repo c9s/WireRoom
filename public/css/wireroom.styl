@@ -204,17 +204,27 @@ a:hover
 .message-container
   margin-top 10px
 
-  .action .nickname:after
-    content " "
+  p
+    padding 3px 8px
+    margin 0
+    border-bottom 1px dotted #eee
+    line-height: 160%
+    -webkit-animation-name: fadeInEffect;
+    -webkit-animation-duration: 0.8s;
+
+  .action .verb
+    display inline-block
+    margin 0 2px
+  .action .target
+    font-weight bold
 
   .action
     background #ffe
 
   .nickname
+    display inline-block
     font-weight bold
-
-  .nickname:after
-    content ": "
+    margin 0 2px
 
   .avatar
     width: 26px
@@ -224,14 +234,6 @@ a:hover
       height: 26px
       vertical-align: top
       margin-right: 0.5em
-
-  p.message
-    padding 3px 8px
-    margin 0
-    border-bottom 1px dotted #eee
-    line-height: 160%
-    -webkit-animation-name: fadeInEffect;
-    -webkit-animation-duration: 0.8s;
 
   .message .column
     margin-right: 0.5em;
