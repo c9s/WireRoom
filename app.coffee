@@ -139,6 +139,7 @@ class WireRoom
 
     payloadForwarder("/=/git", "notification.git", true)
     payloadForwarder("/=/github", "notification.github", true)
+    payloadForwarder("/=/jenkins", "notification.jenkins", true)
 
     @io.sockets.on "connection", (socket) =>
       console.log "A socket with sessionID " + socket.handshake.sessionID
