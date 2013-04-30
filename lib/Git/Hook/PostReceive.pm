@@ -32,7 +32,7 @@ method run ($before, $after, $ref) {
     my @commits = $->get_commits($before,$after);
 
     # truncate commits if it's too large
-    @commits = @commits[ 0..50 ] if scalar(@commits) > 50
+    @commits = @commits[ 0..50 ] if scalar(@commits) > 50;
     return {
         before     => $before,
         after      => $after,
