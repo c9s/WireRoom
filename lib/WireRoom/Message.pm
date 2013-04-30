@@ -72,7 +72,8 @@ method submit (%options) {
     my $ua = LWP::UserAgent->new;
     $ua->timeout(10);
     $ua->env_proxy;
-    return $ua->request($request);
+    my $response = $ua->request($request);
+    print $response->decoded_content, "\n";
 }
 
 method to_hashref {
