@@ -138,7 +138,7 @@ gitCommitDetailTemplate = ->
 
 
 
-class WireRoomSidePanel
+class WRSidePanel
 
   ###
   # @panel the main tab panel
@@ -160,7 +160,7 @@ class SideDetailPanel
     @popover.css('top', @trigger.offset().top - (@popover.height() / 2) )
     $(document.body).append(@popover)
 
-class NotificationPanel
+class WRNotificationPanel
   constructor: (@wireroom, @panel, @options) ->
     template = ->
       div class: "notification-panel"
@@ -209,46 +209,7 @@ class NotificationPanel
         position: "left"
         trigger: "hover"
 
-
-
-
-      ###
-      commitContent.popover({
-        title: "Commit Details"
-        content: () -> $('<div/>').html(commitDetailContent).html()
-        trigger: "click"
-        html: true
-        delay:
-          show: 200
-          hide: 200
-        container: "body"
-        placement: "left"
-      })
-      ###
-
-      ###
-      data.after, data.before 
-      data.commits @array
-          { 
-              id: [commit ref string],
-              author: {
-                  name: [string],
-                  email: [string]
-              },
-              date: [string],
-              merge: [optional] { parent1 => [commit ref string] , parent2 => [commit ref string] }
-          }
-      data.user pushed by {user}
-      data.ref (branch name or tag name)
-      data.ref_type (reference type: 'heads', 'tags')
-      data.type = 'git'
-      data.new_head = [boolean]  ? is a new tag or new branch ?
-      data.is_delete = [boolean] ? is deleted ?
-      data.time = [time string]
-      ###
-
-
-class WireRoomConnectionStatus
+class WRConnectionStatus
 
   ###
   # @el the connection status element
@@ -295,7 +256,7 @@ class WireRoomConnectionStatus
     u(window).on "online", (e) ->
       console.info("online")
 
-class WireRoomChannelSearchInput
+class WRChannelSearchInput
   constructor: (@wireroom, @form) ->
     self = this
     @searchInput = @form.find('input')
@@ -304,7 +265,7 @@ class WireRoomChannelSearchInput
       self.wireroom.joinChannel room
       return false
 
-class WireRoomMessageInput
+class WRMessageInput
   constructor: (@wireroom, @panel, @options) ->
     templateContent = """
       <div class="input-panel clearfix">
@@ -398,8 +359,8 @@ class WireRoom
     })
 
 
-    @plugins.status        = new WireRoomConnectionStatus(this, $('#connectionStatus') )
-    @plugins.channelSearch = new WireRoomChannelSearchInput(this,$('#channelSearch'))
+    @plugins.status        = new WRConnectionStatus(this, $('#connectionStatus') )
+    @plugins.channelSearch = new WRChannelSearchInput(this,$('#channelSearch'))
 
     @hasLogs = false
 
@@ -442,9 +403,9 @@ class WireRoom
       messagePanelEl   = $('<div/>')
       messagePanelEl.addClass('message-container').appendTo($panel)
       messageContainer     = new WireRoomMessageContainer(self, messagePanelEl, { room: room })
-      messageInput         = new WireRoomMessageInput(self, $panel, { room: room })
-      sidePanel            = new WireRoomSidePanel(self, $panel, { room: room })
-      gitNotificationPanel = new NotificationPanel(self, sidePanel.container, { room: room })
+      messageInput         = new WRMessageInput(self, $panel, { room: room })
+      sidePanel            = new WRSidePanel(self, $panel, { room: room })
+      gitNotificationPanel = new WRNotificationPanel(self, sidePanel.container, { room: room })
 
       @socket.emit "join",
         room: room
