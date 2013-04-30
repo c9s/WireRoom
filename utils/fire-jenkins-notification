@@ -8,7 +8,8 @@ use JSON;
 use YAML;
 
 my $config = YAML::LoadFile "config/testing.yml";
-my $baseUrl = "http://" . $config->{Host} . ":" . $config->{Port};
+my $baseUrl = "http://" . $config->{Host};
+$baseUrl .= ":" . $config->{Port} if $config->{Port} && $config->{Port} != 80;
 
 my $cnt = 3;
 say "Posting commit log to " , $cnt;
