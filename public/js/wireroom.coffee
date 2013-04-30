@@ -23,55 +23,6 @@ class SideDetailPanel
     @popover.css('top', @trigger.offset().top - (@popover.height() / 2) )
     $(document.body).append(@popover)
 
-class WRNotificationPanel
-  constructor: (@wireroom, @panel, @options) ->
-    template = ->
-      div class: "notification-panel"
-    @container = $(CoffeeKup.render(template,{}))
-    @container.appendTo(@panel)
-
-    # pretty date updater
-
-    setInterval (=>
-      @container.find('.message').each (i,e) ->
-        t = $(this).data('timestamp')
-        $(this).find('.time').html( prettyDate(t) ) if t
-    ), 1000
-
-    @wireroom.socket.on "notification.jenkins", (data) =>
-      return if data.room != @options.room
-      # create notification and append to the panel
-      # handle git messages
-      content = $(CoffeeKup.render(jenkinsMessageTemplate, data))
-      content.prependTo(@container)
-        .data('timestamp', data.timestamp)
-
-    @wireroom.socket.on "notification.github", (data) =>
-      return if data.room != @options.room
-      # create notification and append to the panel
-      # handle git messages
-      commitContent = $(CoffeeKup.render(githubCommitTemplate, data))
-      commitContent.prependTo(@container)
-        .data('timestamp', data.timestamp)
-        # commitDetailContent = $(CoffeeKup.render(gitCommitDetailTemplate, data))
-
-    @wireroom.socket.on "notification.git", (data) =>
-      return if data.room != @options.room
-      # create notification and append to the panel
-      # handle git messages
-      commitContent = $(CoffeeKup.render(gitCommitTemplate, data))
-      commitContent.prependTo(@container)
-        .data('timestamp', data.timestamp)
-
-      commitDetailContent = $(CoffeeKup.render(gitCommitDetailTemplate, data))
-
-      # popover
-      commitContent.popover
-        title:   "Title"
-        content: commitDetailContent
-        position: "left"
-        trigger: "hover"
-
 class WRMessageInput
   constructor: (@wireroom, @panel, @options) ->
     templateContent = """
@@ -125,8 +76,8 @@ class WRMessageInput
       @wireroom.socket.emit "publish",
         "nickname": nickname
         "message": message
+        "ident": @wireroom.Identifier
         "room": @options.room
-
       @messageInput.val("").focus()
       return false
   enable: ->
@@ -143,9 +94,7 @@ class WireRoom
 
 
   constructor: (@options) ->
-
     self = this
-
     @BootTime = new Date()
     @Identifier = CybozuLabs.SHA1.calc(Math.random().toString() + new Date().getTime())
 
@@ -201,8 +150,11 @@ class WireRoom
 
     @socket.on "disconnect", => console.warn "socket.io disconnected."
 
+    notificationCenter = new WRNotificationCenter(self)
+
   joinChannel: (room) ->
     self = this
+
 
     # create a new tab for the channel
     @tabs.addTab room, room, ($panel) =>
@@ -212,7 +164,7 @@ class WireRoom
       messageContainer     = new WireRoomMessageContainer(self, messagePanelEl, { room: room })
       messageInput         = new WRMessageInput(self, $panel, { room: room })
       sidePanel            = new WRSidePanel(self, $panel, { room: room })
-      gitNotificationPanel = new WRNotificationPanel(self, sidePanel.container, { room: room })
+      notificationPanel    = new WRNotificationPanel(self, sidePanel.container, { room: room })
 
       @socket.emit "join",
         room: room
