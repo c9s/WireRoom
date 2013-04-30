@@ -1,0 +1,275 @@
+#!/usr/bin/env perl
+use v5.12;
+use lib 'lib';
+use WireRoom::Message;
+use Git::Hook::PostReceive;
+use HTTP::Request::Common;
+use JSON;
+my $cnt = 3;
+say "Posting commit log to " , $cnt;
+for ( 1..$cnt ) {
+    # Fire Jenkins Notification
+    my $rand = int(rand(100)) + 1;
+    my $ua = LWP::UserAgent->new;
+    my $text =<<'JSON';
+{
+    "time": "01:39",
+    "status": "SUCCESS",
+    "name": "CLIFramework",
+    "build": {
+        "number": "20",
+        "url": "http://build.wireroom.com/job/CLIFramework/20/",
+        "details": {
+            "builtOn": "",
+            "actions": [{
+                "causes": [{
+                    "shortDescription": "Started by user anonymous",
+                    "userId": null,
+                    "userName": "anonymous"
+                }]
+            },
+            {
+                "buildsByBranchName": {
+                    "origin/HEAD": {
+                        "revision": {
+                            "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                            "branch": [{
+                                "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                                "name": "origin/HEAD"
+                            },
+                            {
+                                "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                                "name": "origin/master"
+                            }]
+                        },
+                        "buildResult": null,
+                        "buildNumber": 20
+                    },
+                    "origin/master": {
+                        "revision": {
+                            "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                            "branch": [{
+                                "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                                "name": "origin/HEAD"
+                            },
+                            {
+                                "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                                "name": "origin/master"
+                            }]
+                        },
+                        "buildResult": null,
+                        "buildNumber": 20
+                    }
+                },
+                "scmName": "",
+                "lastBuiltRevision": {
+                    "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                    "branch": [{
+                        "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                        "name": "origin/HEAD"
+                    },
+                    {
+                        "SHA1": "e1994041083eec683e79db6908787e247f8968eb",
+                        "name": "origin/master"
+                    }]
+                }
+            },
+            {},
+            {},
+            {},
+            {}],
+            "changeSet": {
+                "kind": null,
+                "items": []
+            },
+            "number": 20,
+            "artifacts": [],
+            "culprits": [],
+            "timestamp": 1342460366711,
+            "url": "http://build.wireroom.com/job/CLIFramework/20/",
+            "id": "2012-07-17_01-39-26",
+            "duration": 9336,
+            "description": null,
+            "fullDisplayName": "CLIFramework #20",
+            "keepLog": false,
+            "building": false,
+            "estimatedDuration": 13932,
+            "result": "SUCCESS"
+        },
+        "job": {
+            "color": null,
+            "url": "http://build.wireroom.com/job/CLIFramework",
+            "name": "CLIFramework",
+            "details": {
+                "concurrentBuild": false,
+                "keepDependencies": false,
+                "scm": {},
+                "actions": [{},
+                {},
+                {},
+                {}],
+                "lastUnsuccessfulBuild": null,
+                "lastBuild": {
+                    "number": 20,
+                    "url": "http://build.wireroom.com/job/CLIFramework/20/"
+                },
+                "lastCompletedBuild": {
+                    "number": 20,
+                    "url": "http://build.wireroom.com/job/CLIFramework/20/"
+                },
+                "inQueue": false,
+                "upstreamProjects": [],
+                "color": "blue",
+                "lastSuccessfulBuild": {
+                    "number": 20,
+                    "url": "http://build.wireroom.com/job/CLIFramework/20/"
+                },
+                "nextBuildNumber": 21,
+                "url": "http://build.wireroom.com/job/CLIFramework/",
+                "property": [{},
+                {}],
+                "displayName": "CLIFramework",
+                "displayNameOrNull": null,
+                "lastStableBuild": {
+                    "number": 20,
+                    "url": "http://build.wireroom.com/job/CLIFramework/20/"
+                },
+                "name": "CLIFramework",
+                "buildable": true,
+                "healthReport": [{
+                    "iconUrl": "health-40to59.png",
+                    "score": 46,
+                    "description": "Clover Coverage: Elements 46% (459/1008)"
+                },
+                {
+                    "iconUrl": "health-80plus.png",
+                    "score": 100,
+                    "description": "Build stability: No recent builds failed."
+                }],
+                "lastUnstableBuild": null,
+                "firstBuild": {
+                    "number": 16,
+                    "url": "http://build.wireroom.com/job/CLIFramework/16/"
+                },
+                "description": "<embed height=\"300\" src=\"ws/build/pdepend/overview-pyramid.svg\" type=\"image/svg+xml\" width=\"500\"></embed>\r\n<embed height=\"300\" src=\"ws/build/pdepend/dependencies.svg\" type=\"image/svg+xml\" width=\"500\"></embed>",
+                "downstreamProjects": [],
+                "queueItem": null,
+                "builds": [{
+                    "number": 20,
+                    "url": "http://build.wireroom.com/job/CLIFramework/20/"
+                },
+                {
+                    "number": 19,
+                    "url": "http://build.wireroom.com/job/CLIFramework/19/"
+                },
+                {
+                    "number": 18,
+                    "url": "http://build.wireroom.com/job/CLIFramework/18/"
+                },
+                {
+                    "number": 17,
+                    "url": "http://build.wireroom.com/job/CLIFramework/17/"
+                },
+                {
+                    "number": 16,
+                    "url": "http://build.wireroom.com/job/CLIFramework/16/"
+                }],
+                "lastFailedBuild": null
+            }
+        }
+    },
+    "job": {
+        "color": null,
+        "url": "http://build.wireroom.com/job/CLIFramework/20/",
+        "name": "CLIFramework",
+        "details": {
+            "concurrentBuild": false,
+            "keepDependencies": false,
+            "scm": {},
+            "actions": [{},
+            {},
+            {},
+            {}],
+            "lastUnsuccessfulBuild": null,
+            "lastBuild": {
+                "number": 20,
+                "url": "http://build.wireroom.com/job/CLIFramework/20/"
+            },
+            "lastCompletedBuild": {
+                "number": 20,
+                "url": "http://build.wireroom.com/job/CLIFramework/20/"
+            },
+            "inQueue": false,
+            "upstreamProjects": [],
+            "color": "blue",
+            "lastSuccessfulBuild": {
+                "number": 20,
+                "url": "http://build.wireroom.com/job/CLIFramework/20/"
+            },
+            "nextBuildNumber": 21,
+            "url": "http://build.wireroom.com/job/CLIFramework/",
+            "property": [{},
+            {}],
+            "displayName": "CLIFramework",
+            "displayNameOrNull": null,
+            "lastStableBuild": {
+                "number": 20,
+                "url": "http://build.wireroom.com/job/CLIFramework/20/"
+            },
+            "name": "CLIFramework",
+            "buildable": true,
+            "healthReport": [{
+                "iconUrl": "health-40to59.png",
+                "score": 46,
+                "description": "Clover Coverage: Elements 46% (459/1008)"
+            },
+            {
+                "iconUrl": "health-80plus.png",
+                "score": 100,
+                "description": "Build stability: No recent builds failed."
+            }],
+            "lastUnstableBuild": null,
+            "firstBuild": {
+                "number": 16,
+                "url": "http://build.wireroom.com/job/CLIFramework/16/"
+            },
+            "description": "<embed height=\"300\" src=\"ws/build/pdepend/overview-pyramid.svg\" type=\"image/svg+xml\" width=\"500\"></embed>\r\n<embed height=\"300\" src=\"ws/build/pdepend/dependencies.svg\" type=\"image/svg+xml\" width=\"500\"></embed>",
+            "downstreamProjects": [],
+            "queueItem": null,
+            "builds": [{
+                "number": 20,
+                "url": "http://build.wireroom.com/job/CLIFramework/20/"
+            },
+            {
+                "number": 19,
+                "url": "http://build.wireroom.com/job/CLIFramework/19/"
+            },
+            {
+                "number": 18,
+                "url": "http://build.wireroom.com/job/CLIFramework/18/"
+            },
+            {
+                "number": 17,
+                "url": "http://build.wireroom.com/job/CLIFramework/17/"
+            },
+            {
+                "number": 16,
+                "url": "http://build.wireroom.com/job/CLIFramework/16/"
+            }],
+            "lastFailedBuild": null
+        }
+    },
+    "parameters": null,
+    "phase": "COMPLETED",
+    "url": "http://build.wireroom.com/job/CLIFramework/20/",
+    "address": "Someone-127.0.0.1",
+    "type": "jenkins.notification"
+}
+JSON
+    # port 5000 for local development.
+    $ua->request(POST 'http://localhost:3000/=/jenkins', 
+        Content => $text
+    );
+    print ".";
+}
+
