@@ -1,16 +1,3 @@
-.popover {
-  width: 420px;
-}
-.popover h1,
-.popover h2,
-.popover h3,
-.popover h4,
-.popover h5 {
-  margin-bottom: 10px;
-}
-.popover .title {
-  font-size: 12px;
-}
 body {
   font-color: #333;
   text-shadow: #fff;
@@ -32,15 +19,6 @@ h5 {
 form {
   margin: 0 auto;
   padding: 0;
-}
-a,
-a:link,
-a:visited {
-  text-decoration: none;
-  color: #4183c4;
-}
-a:hover {
-  text-decoration: underline;
 }
 .grid-2p {
   float: left;
@@ -73,38 +51,6 @@ a:hover {
 }
 .clearfix:after {
   clear: both;
-}
-.channel-search {
-  float: right;
-}
-.tabs .tab-content {
-  position: relative;
-}
-.tabs ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  border-bottom: 1px solid #ccc;
-}
-.tabs ul li {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
-.tabs ul li a {
-  display: block;
-  border: 1px solid #ccc;
-  -webkit-border-radius: 10px 10px 0 0;
-  -moz-border-radius: 10px 10px 0 0;
-  border-radius: 10px 10px 0 0;
-  padding: 5px 10px;
-  margin: 0 3px;
-  background: #e6e6e6;
-}
-.tabs ul li a.active {
-  background: #fff;
 }
 .side-panel {
   position: fixed;
@@ -178,11 +124,63 @@ a:hover {
 .side-panel .notification-panel .git .time {
   font-size: 10px;
 }
-.side-panel .notification-panel .jenkins .commit .meta,
+.popover {
+  width: 420px;
+}
+.popover h1,
+.popover h2,
+.popover h3,
+.popover h4,
+.popover h5 {
+  margin-bottom: 10px;
+}
+.popover .title {
+  font-size: 12px;
+}
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #4183c4;
+}
+a:hover {
+  text-decoration: underline;
+}
+.channel-search {
+  float: right;
+}
+.tabs .tab-content {
+  position: relative;
+}
+.tabs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.tabs ul li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+.tabs ul li a {
+  display: block;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+  padding: 5px 10px;
+  margin: 0 3px;
+  background: #e6e6e6;
+}
+.tabs ul li a.active {
+  background: #fff;
+}
 .detail-content .commit .meta {
   font-weight: bold;
 }
-.side-panel .notification-panel .jenkins .commit .message,
 .detail-content .commit .message {
   font-family: Monospace;
 }

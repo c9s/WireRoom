@@ -1,5 +1,10 @@
 @import 'vendor'
+@import 'reset'
+@import 'grid'
+@import 'clearfix'
 
+// application
+@import 'wireroom.sidepanel'
 
 // override jquery popover style
 .popover
@@ -9,26 +14,6 @@
 .popover .title
   font-size 12px
 
-
-
-body
-  font-color #333
-  text-shadow #fff
-  font-size 1em
-  font-family Helvetica, Arial, Sans-Serif
-  margin 0
-  padding 0
-  background-color #eee
-
-h1, h2, h3, h4, h5
-  font-family Helvetica, Arial, Sans-Serif
-  margin 0
-  padding 0
-
-form
-  margin 0 auto
-  padding 0
-
 a,
 a:link,
 a:visited
@@ -36,35 +21,6 @@ a:visited
   color #4183c4
 a:hover
   text-decoration underline
-
-
-.grid-2p
-  float: left
-  width: 20%
-.grid-3p
-  float: left
-  width: 30%
-.grid-5p
-  float: left
-  width: 50%
-.grid-6p
-  float: left
-  width: 60%
-.grid-7p
-  float: left
-  width: 70%
-
-.clearfix
-  *zoom: 1
-  &:before,
-  &:after
-    display: table
-    content: ""
-    // Fixes Opera/contenteditable bug:
-    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
-    line-height: 0
-  &:after
-    clear: both
 
 .channel-search
   float: right
@@ -92,71 +48,6 @@ a:hover
         background: #e6e6e6
       a.active
         background: #fff
-
-.side-panel
-  position fixed
-  width 500px
-  right -500px
-  top 38px
-  bottom 30px
-  padding 0
-  border-left 1px solid #ccc
-  background #fff
-  box-shadow -3px 3px 3px #aaa
-  -webkit-transform all
-  -moz-transform all
-  -webkit-transition right 0.8s
-  -moz-transition right 0.8s
-  &.show
-    right 0px
-    -webkit-transition right 0.8s
-    -moz-transition right 0.8s
-  .handle
-    position absolute
-    top 80px
-    left -38px
-    width 38px
-    height 30px
-    border-radius 10px 0 0 10px
-    box-shadow -3px 3px 3px #aaa
-    background #ccc
-  .handle:hover
-    background #ddd
-
-.side-panel .notification-panel
-  max-height 90%
-  overflow auto
-
-.side-panel .notification-panel .message
-  padding 3px 5px
-  border-bottom 1px solid #ccc
-  vertical-align middle
-  .icon
-    color #666
-    width 22px
-    margin-right 3px
-  .column
-    // display inline-block
-    float left
-    line-height 24px
-    margin-right 3px
-    vertical-align middle
-    display block
-    // font-family Consolas, "Liberation Mono", Courier, monospace
-
-.side-panel .notification-panel .github
-.side-panel .notification-panel .git
-  .author
-    font-weight bold
-  .hash
-    color #4183c4
-  // .branch
-  // .action
-  .time
-    font-size 10px
-
-.side-panel .notification-panel .jenkins
-
 
 .detail-content
   .commit
