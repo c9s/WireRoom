@@ -7,10 +7,7 @@ class WRSidePanel
   # @panel the main tab panel
   ###
   constructor: (@wireroom, @panel, @options) ->
-    template = ->
-      div class: "side-panel", ->
-        div class: "handle", ->
-    @container = $(CoffeeKup.render(template,{}))
+    @container = $(CoffeeKup.render(sidePanelTemplate,{}))
     @panel.append @container
     @container.find('.handle').click (e) =>
       @container.toggleClass('show')

@@ -1,3 +1,14 @@
+
+
+window.sidePanelTemplate = ->
+  div class: "side-panel", ->
+    div class: "handle", ->
+
+window.notificationPanelTemplate = () ->
+  div class: "panel-title", ->
+    h5 "Notification Center"
+  div class: "panel-content notification-panel", ->
+
 window.jenkinsMessageTemplate = () ->
   div class: "jenkins message clearfix", ->
     span class: "column icon", ->
