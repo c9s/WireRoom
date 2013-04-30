@@ -1,0 +1,121 @@
+/**
+ * 	CSS reset by Eric Meyer
+ *  http://meyerweb.com/eric/tools/css/reset/ 
+ *  v2.0 | 20110126
+ *  License: none (public domain)
+ */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/**
+ * 	Demo page styling
+ */
+body {
+	margin: 80px 10%;
+	font-family: Arial;
+	font-size: 15px;
+	line-height: 1.3em;
+	min-width: 1000px;
+}
+h1 {
+	font-size: 2.5em;
+}
+h2 {
+	font-size: 2em;
+}
+h3 {
+	font-size: 1.6em;
+}
+h4 {
+	font-size: 1.1em;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+	margin: 0.7em 0;
+}
+p {
+	margin: 1em 0;
+}
+strong {
+	font-weight: bold;
+}
+em {
+	font-style: italic;
+}
+ul, ol {
+	list-style: square;
+	margin: 0 2em;
+}
+ul ul, ul ol, ol ul, ol ol {
+	margin: 0 0 0 1.5em;
+}
+.sandbox {
+	margin: 0.7em 0;
+	padding: 1em;
+	background: #f9f9f9;
+}
+code {
+	font-family: Courier;
+	background: #f9f9f9;
+}
+pre {
+	margin: 1em 0; padding: 1em;
+	background: #f9f9f9;
+	overflow: auto;
+}
+.sandbox, pre {
+	border-radius: 5px;
+}
+table, tr, td, th {
+	border: 1px solid #ddd;
+}
+th {
+	background: #f9f9f9;
+	font-weight: bold;
+}
+th, td {
+	padding: 5px;
+}
