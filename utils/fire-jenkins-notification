@@ -5,6 +5,11 @@ use WireRoom::Message;
 use Git::Hook::PostReceive;
 use HTTP::Request::Common;
 use JSON;
+use YAML;
+
+$config = YAML::LoadFile "config/testing.yml"
+$baseUrl = "http://" . $config->{Host} . ":" . $config->{Port};
+
 my $cnt = 3;
 say "Posting commit log to " , $cnt;
 for ( 1..$cnt ) {
@@ -271,7 +276,7 @@ JSON
         payload => $payload,
         room    => "Hall"
     );
-    $msg->submit( url => 'http://localhost:3000/=/jenkins' );
+    $msg->submit( url => "$baseUrl/=/jenkins/Hall" );
     print ".";
 }
 

@@ -132,15 +132,15 @@ class WireRoom
     payloadForwarder = (mountPath, toMessageType, enableBacklog) =>
       @app.post mountPath, (req,res) ->
         data = req.body
-        # data.room = data.room || req.params.room
+        data.room = req.params.room if req.params.room
         return res.send(".room is required.") unless data.room
         io.sockets.in(data.room).emit( toMessageType, data)
         self.backlog.append(data.room, toMessageType, data) if enableBacklog
         res.send('{ "success": 1}')
 
-    payloadForwarder("/=/git", "notification.git", true)
-    payloadForwarder("/=/github", "notification.github", true)
-    payloadForwarder("/=/jenkins", "notification.jenkins", true)
+    payloadForwarder("/=/git/:room", "notification.git", true)
+    payloadForwarder("/=/github/:room", "notification.github", true)
+    payloadForwarder("/=/jenkins/:room", "notification.jenkins", true)
 
     @io.sockets.on "connection", (socket) =>
       console.log "A socket with sessionID " + socket.handshake.sessionID
