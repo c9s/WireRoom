@@ -108,6 +108,10 @@
 .side-panel .notification-panel .message {
   padding: 3px 5px;
   border-bottom: 1px solid #ccc;
+  vertical-align: middle;
+}
+.side-panel .notification-panel .message .icon {
+  width: 16px;
 }
 .side-panel .notification-panel .message .column {
   float: left;

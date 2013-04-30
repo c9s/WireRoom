@@ -4,7 +4,9 @@ githubCommitTemplate = () ->
   div class: "github message clearfix", ->
     span class: "column icon", ->
       span class: "icon icon-github", ->
-    span class: "column author", -> @pusher.name
+    span class: "column author", ->
+      a href: "http://github.com/" + @pusher.name, target: "_blank", ->
+        @pusher.name
     span class: "column action", -> "pushed to"
     span class: "column branch", -> @ref.replace("refs/heads/", "")
     span class: "column hash before", -> @before.substr(0,5)
