@@ -1,6 +1,6 @@
 public/logs
 node_modules/
-
+config/application.yml
 # ignore files for perl module
 blib
 pm_to_blib
