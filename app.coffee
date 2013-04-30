@@ -132,7 +132,7 @@ class WireRoom
     payloadForwarder = (mountPath, toMessageType, enableBacklog) =>
       @app.post mountPath, (req,res) ->
         data = req.body
-        data.room = data.room || req.params.room
+        # data.room = data.room || req.params.room
         return res.send(".room is required.") unless data.room
         io.sockets.in(data.room).emit( toMessageType, data)
         self.backlog.append(data.room, toMessageType, data) if enableBacklog

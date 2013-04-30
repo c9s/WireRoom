@@ -1,3 +1,34 @@
+body {
+  font-color: #333;
+  text-shadow: #fff;
+  font-size: 1em;
+  font-family: Helvetica, Arial, Sans-Serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eee;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, Sans-Serif;
+}
+form {
+  margin: 0 auto;
+  padding: 0;
+}
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #4183c4;
+}
+a:hover {
+  text-decoration: underline;
+}
 .grid-2p {
   float: left;
   width: 20%;
@@ -111,10 +142,13 @@
   vertical-align: middle;
 }
 .side-panel .notification-panel .message .icon {
-  width: 16px;
+  color: #666;
+  width: 22px;
+  margin-right: 3px;
 }
 .side-panel .notification-panel .message .column {
   float: left;
+  line-height: 24px;
   margin-right: 3px;
   vertical-align: middle;
   display: block;
@@ -146,36 +180,6 @@
 .input-panel .submit-button {
   float: left;
   margin-left: 12px;
-}
-body {
-  font-color: #333;
-  text-shadow: #fff;
-  font-size: 1em;
-  font-family: Helvetica, Arial, Sans-Serif;
-  margin: 0;
-  padding: 0;
-  background-color: #eee;
-}
-h1,
-h2,
-h3,
-h4,
-h5 {
-  margin: 0;
-  padding: 0;
-  font-family: Helvetica, Arial, Sans-Serif;
-}
-form {
-  margin: 0 auto;
-  padding: 0;
-}
-a,
-a:link,
-a:visited {
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
 }
 @-webkit-keyframes fadeInEffect {
   0% {

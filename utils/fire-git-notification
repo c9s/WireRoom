@@ -17,10 +17,10 @@ for ( 1..$cnt ) {
         'refs/heads/master'
     );
     $payload->{user} = $names[ int rand 3 ];
-    $payload->{room} = "Hall";
     my $msg = WireRoom::Message->new( 
         type    => 'notification.git',
         payload => $payload,
+        room    => "Hall"
     );
     $msg->submit( url => 'http://localhost:3000/=/git' );
 }

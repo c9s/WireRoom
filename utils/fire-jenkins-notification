@@ -10,7 +10,6 @@ say "Posting commit log to " , $cnt;
 for ( 1..$cnt ) {
     # Fire Jenkins Notification
     my $rand = int(rand(100)) + 1;
-    my $ua = LWP::UserAgent->new;
     my $text =<<'JSON';
 {
     "time": "01:39",
@@ -266,10 +265,13 @@ for ( 1..$cnt ) {
     "type": "jenkins.notification"
 }
 JSON
-    # port 5000 for local development.
-    $ua->request(POST 'http://localhost:3000/=/jenkins', 
-        Content => $text
+    my $payload = decode_json $text;
+    my $msg = WireRoom::Message->new( 
+        type    => 'notification.jenkins',
+        payload => $payload,
+        room    => "Hall"
     );
+    $msg->submit( url => 'http://localhost:3000/=/jenkins' );
     print ".";
 }
 

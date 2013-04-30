@@ -149,9 +149,9 @@ my $payloadJson =<<'END';
 END
 
 my $payload = decode_json $payloadJson;
-$payload->{room} = "Hall";
 my $msg = WireRoom::Message->new( 
     type    => 'notification.github',
     payload => $payload,
+    room    => "Hall"
 );
 $msg->submit( url => 'http://localhost:3000/=/github' );

@@ -22,6 +22,9 @@ has client =>
 has address =>
     is => 'rw';
 
+has room =>
+    is => 'rw';
+
 has timestamp =>
     is => 'rw',
     default => sub { time };
@@ -74,7 +77,7 @@ method submit (%options) {
 
 method to_hashref {
     my $msg = $->payload;
-    map { $msg->{ $_ } = $->$_ } qw(type client address timestamp);
+    map { $msg->{ $_ } = $->$_ } qw(type client address timestamp room);
     return $msg;
 };
 

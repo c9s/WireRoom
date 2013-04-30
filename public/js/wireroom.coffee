@@ -1,7 +1,7 @@
 $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
 jenkinsMessageTemplate = () ->
-  div class: "github message clearfix", ->
+  div class: "jenkins message clearfix", ->
     span class: "column icon", ->
       span class: "icon icon-cogs", ->
     span class: "column author", -> "Jenkins"
@@ -101,10 +101,18 @@ class NotificationPanel
     # pretty date updater
 
     setInterval (=>
-      @container.find('.git').each (i,e) ->
+      @container.find('.message').each (i,e) ->
         t = $(this).data('timestamp')
-        $(this).find('.timestamp').html( prettyDate(t) ) if t
+        $(this).find('.time').html( prettyDate(t) ) if t
     ), 1000
+
+    @wireroom.socket.on "notification.jenkins", (data) =>
+      return if data.room != @options.room
+      # create notification and append to the panel
+      # handle git messages
+      content = $(CoffeeKup.render(jenkinsMessageTemplate, data))
+      content.prependTo(@container)
+        .data('timestamp', data.timestamp)
 
     @wireroom.socket.on "notification.github", (data) =>
       return if data.room != @options.room
