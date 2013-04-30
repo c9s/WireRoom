@@ -129,13 +129,16 @@ class WireRoom
 #        accept(null, true)
     
     # TODO: move this to GitNotificationService
-    @app.post "/=/git", (req,res) ->
-      data = req.body
-      return res.send(".room is required.") unless data.room
+    payloadForwarder = (mountPath, toMessageType, enableBacklog) =>
+      @app.post mountPath, (req,res) ->
+        data = req.body
+        return res.send(".room is required.") unless data.room
+        io.sockets.in(data.room).emit( toMessageType, data)
+        self.backlog.append(data.room, toMessageType, data) if enableBacklog
+        res.send('{ "success": 1}')
 
-      io.sockets.in(data.room).emit("notification.git", data)
-      self.backlog.append(data.room, "notification.git", data)
-      res.send("success")
+    payloadForwarder("/=/git", "notification.git", true)
+    payloadForwarder("/=/github", "notification.github", true)
 
     @io.sockets.on "connection", (socket) =>
       console.log "A socket with sessionID " + socket.handshake.sessionID
