@@ -6,6 +6,8 @@ use Git::Hook::PostReceive;
 use HTTP::Request::Common;
 use JSON;
 
+# vim:foldmethod=manual:
+
 my $payloadJson =<<'END';
 {
    "after":"1481a2de7b2a7d02428ad93446ab166be7793fbb",

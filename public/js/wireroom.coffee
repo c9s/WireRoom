@@ -1,5 +1,55 @@
 $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 
+githubCommitTemplate = () ->
+  div class: "github clearfix", ->
+    span class: "column author", -> @pusher.name
+    span class: "column action", -> "pushed to"
+    span class: "column branch", -> @ref.replace("ref/heads", "")
+    span class: "column hash before", -> @before.substr(0,5)
+    span class: "column", -> "to"
+    span class: "column hash after",  -> @after.substr(0,5)
+    span class: "column count",  -> @commits.length
+    span class: "column time", -> prettyDate(@timestamp)
+    # "compare" (compare link)
+    # "created":false,
+    # "deleted":false,
+    # "forced":false,
+    # "ref":"refs/heads/master",
+    # "repository":
+    # "pusher.name"
+
+gitCommitTemplate = () ->
+  div class: "git clearfix", ->
+    span class: "column author", -> @user
+    span class: "column action", -> "pushed to"
+    span class: "column branch", -> @ref
+    span class: "column hash before", -> @before.substr(0,5)
+    span class: "column", -> "to"
+    span class: "column hash after",  -> @after.substr(0,5)
+    span class: "column count",  -> @commits.length
+    span class: "column time", -> prettyDate(@timestamp)
+
+
+githubCommitDetailTemplate = ->
+  div class: "commits" ,->
+    for commit in @commits
+      div class: "commit", ->
+        div class: "meta clearfix", ->
+          span class: "column id", -> commit.id.substr(0,5)
+          span class: "column author", -> commit.author.name + " <#{ commit.author.email }> "
+        div class: "message", -> commit.message
+
+
+
+
+
+
+
+
+
+
+
+
 class WireRoomSidePanel
 
   ###
@@ -22,7 +72,7 @@ class SideDetailPanel
     @popover.css('top', @trigger.offset().top - (@popover.height() / 2) )
     $(document.body).append(@popover)
 
-class GitNotificationPanel
+class NotificationPanel
   constructor: (@wireroom, @panel, @options) ->
     template = ->
       div class: "notification-panel"
@@ -34,38 +84,26 @@ class GitNotificationPanel
     setInterval (=>
       @container.find('.git').each (i,e) ->
         t = $(this).data('timestamp')
-        if t
-          $(this).find('.timestamp').html( prettyDate(t) )
+        $(this).find('.timestamp').html( prettyDate(t) ) if t
     ), 1000
+
+    @wireroom.socket.on "notification.github", (data) =>
+      return if data.room != @options.room
+      # create notification and append to the panel
+      # handle git messages
+      commitContent = $(CoffeeKup.render(githubCommitTemplate, data))
+      commitContent.prependTo(@container)
+        .data('timestamp', data.timestamp)
+        # commitDetailContent = $(CoffeeKup.render(commitDetailTemplate, data))
 
     @wireroom.socket.on "notification.git", (data) =>
       return if data.room != @options.room
       # create notification and append to the panel
       # handle git messages
-      commitTemplate = () ->
-        div class: "git clearfix", ->
-          span class: "column author", -> @user
-          span class: "column action", -> "pushed to"
-          span class: "column branch", -> @ref
-          span class: "column hash before", -> @before.substr(0,5)
-          span class: "column", -> "..."
-          span class: "column hash after",  -> @after.substr(0,5)
-          span class: "column count",  -> @commits.length
-          span class: "column time", -> prettyDate(@timestamp)
-      commitContent = $(CoffeeKup.render(commitTemplate, data))
+      commitContent = $(CoffeeKup.render(gitCommitTemplate, data))
       commitContent.prependTo(@container)
-      commitContent.data('timestamp', data.timestamp)
-
-      commitDetailTemplate = ->
-        div class: "commits" ,->
-          for commit in @commits
-            div class: "commit", ->
-              div class: "meta clearfix", ->
-                span class: "column id", -> commit.id.substr(0,5)
-                span class: "column author", -> commit.author.name + " <#{ commit.author.email }> "
-              div class: "message", -> commit.message
-      commitDetailContent = $(CoffeeKup.render(commitDetailTemplate, data))
-
+        .data('timestamp', data.timestamp)
+        # commitDetailContent = $(CoffeeKup.render(commitDetailTemplate, data))
 
       ###
       commitContent.popover({
@@ -299,7 +337,7 @@ class WireRoom
       messageContainer     = new WireRoomMessageContainer(self, messagePanelEl, { room: room })
       messageInput         = new WireRoomMessageInput(self, $panel, { room: room })
       sidePanel            = new WireRoomSidePanel(self, $panel, { room: room })
-      gitNotificationPanel = new GitNotificationPanel(self, sidePanel.container, { room: room })
+      gitNotificationPanel = new NotificationPanel(self, sidePanel.container, { room: room })
 
       @socket.emit "join",
         room: room

@@ -1,2 +1,2 @@
-server:
+run:
 	coffee app.coffee
