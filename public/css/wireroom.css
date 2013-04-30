@@ -64,8 +64,8 @@
 }
 .side-panel {
   position: fixed;
-  width: 400px;
-  right: -400px;
+  width: 500px;
+  right: -500px;
   top: 38px;
   bottom: 30px;
   padding: 0;

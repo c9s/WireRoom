@@ -58,8 +58,8 @@
 
 .side-panel
   position fixed
-  width 400px
-  right -400px
+  width 500px
+  right -500px
   top 38px
   bottom 30px
   padding 0
@@ -90,19 +90,21 @@
   max-height 90%
   overflow auto
 
-.side-panel .notification-panel .github,
-.side-panel .notification-panel .git
+.side-panel .notification-panel .message
   padding 3px 5px
   border-bottom 1px solid #ccc
+  .icon
+    display inline-block
   .column
     display inline-block
     margin-right 3px
-  .hash
-    color #4183c4
     // font-family Consolas, "Liberation Mono", Courier, monospace
+
+.side-panel .notification-panel .git
   .author
     font-weight bold
-    
+  .hash
+    color #4183c4
 
 .side-panel .notification-panel .jenkins
 
