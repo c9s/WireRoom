@@ -109,12 +109,11 @@
   padding: 3px 5px;
   border-bottom: 1px solid #ccc;
 }
-.side-panel .notification-panel .message .icon {
-  display: inline-block;
-}
 .side-panel .notification-panel .message .column {
-  display: inline-block;
+  float: left;
   margin-right: 3px;
+  vertical-align: middle;
+  display: block;
 }
 .side-panel .notification-panel .github .author,
 .side-panel .notification-panel .git .author {
