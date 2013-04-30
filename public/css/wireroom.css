@@ -105,23 +105,28 @@
   max-height: 90%;
   overflow: auto;
 }
-.side-panel .notification-panel .github,
-.side-panel .notification-panel .git {
+.side-panel .notification-panel .message {
   padding: 3px 5px;
   border-bottom: 1px solid #ccc;
 }
-.side-panel .notification-panel .github .column,
-.side-panel .notification-panel .git .column {
+.side-panel .notification-panel .message .icon {
+  display: inline-block;
+}
+.side-panel .notification-panel .message .column {
   display: inline-block;
   margin-right: 3px;
+}
+.side-panel .notification-panel .github .author,
+.side-panel .notification-panel .git .author {
+  font-weight: bold;
 }
 .side-panel .notification-panel .github .hash,
 .side-panel .notification-panel .git .hash {
   color: #4183c4;
 }
-.side-panel .notification-panel .github .author,
-.side-panel .notification-panel .git .author {
-  font-weight: bold;
+.side-panel .notification-panel .github .time,
+.side-panel .notification-panel .git .time {
+  font-size: 10px;
 }
 .side-panel .notification-panel .jenkins .nickname-column,
 .input-panel .nickname-column {

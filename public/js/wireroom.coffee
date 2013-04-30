@@ -3,6 +3,7 @@ $.getScript("/js/json2.js") if typeof(JSON) is "undefined"
 githubCommitTemplate = () ->
   div class: "github message clearfix", ->
     span class: "column icon", ->
+      span class: "icon icon-github", ->
     span class: "column author", -> @pusher.name
     span class: "column action", -> "pushed to"
     span class: "column branch", -> @ref.replace("refs/heads/", "")
@@ -20,7 +21,9 @@ githubCommitTemplate = () ->
     # "pusher.name"
 
 gitCommitTemplate = () ->
-  div class: "git messgae clearfix", ->
+  div class: "git message clearfix", ->
+    span class: "column icon", ->
+      span class: "icon icon-github-sign", ->
     span class: "column author", -> @user
     span class: "column action", -> "pushed to"
     span class: "column branch", -> @ref
