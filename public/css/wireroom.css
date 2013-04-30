@@ -64,8 +64,8 @@
 }
 .side-panel {
   position: fixed;
-  width: 300px;
-  right: -300px;
+  width: 400px;
+  right: -400px;
   top: 38px;
   bottom: 30px;
   padding: 0;
@@ -105,17 +105,21 @@
   max-height: 90%;
   overflow: auto;
 }
+.side-panel .notification-panel .github,
 .side-panel .notification-panel .git {
   padding: 3px 5px;
   border-bottom: 1px solid #ccc;
 }
+.side-panel .notification-panel .github .column,
 .side-panel .notification-panel .git .column {
   display: inline-block;
   margin-right: 3px;
 }
+.side-panel .notification-panel .github .hash,
 .side-panel .notification-panel .git .hash {
   color: #4183c4;
 }
+.side-panel .notification-panel .github .author,
 .side-panel .notification-panel .git .author {
   font-weight: bold;
 }

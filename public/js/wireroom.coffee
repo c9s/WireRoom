@@ -4,12 +4,12 @@ githubCommitTemplate = () ->
   div class: "github clearfix", ->
     span class: "column author", -> @pusher.name
     span class: "column action", -> "pushed to"
-    span class: "column branch", -> @ref.replace("ref/heads", "")
+    span class: "column branch", -> @ref.replace("refs/heads/", "")
     span class: "column hash before", -> @before.substr(0,5)
     span class: "column", -> "to"
     span class: "column hash after",  -> @after.substr(0,5)
     span class: "column count",  -> @commits.length
-    span class: "column time", -> prettyDate(@timestamp)
+    time class: "column time", -> prettyDate(@timestamp)
     # "compare" (compare link)
     # "created":false,
     # "deleted":false,
@@ -27,8 +27,7 @@ gitCommitTemplate = () ->
     span class: "column", -> "to"
     span class: "column hash after",  -> @after.substr(0,5)
     span class: "column count",  -> @commits.length
-    span class: "column time", -> prettyDate(@timestamp)
-
+    time class: "column time", -> prettyDate(@timestamp)
 
 githubCommitDetailTemplate = ->
   div class: "commits" ,->
