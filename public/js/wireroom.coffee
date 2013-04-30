@@ -168,8 +168,8 @@ class WireRoom
 
   joinChannel: (room) ->
     self = this
-    return if _joined[ room ]
-    _joined[ room ] = true
+    return if @_joined[ room ]
+    @_joined[ room ] = true
 
 
     # create a new tab for the channel
