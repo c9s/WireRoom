@@ -120,6 +120,7 @@ gitCommitDetailTemplate = ->
   div ->
     div class: "detail-content git", ->
       div class: "commits" ,->
+        div, -> @commits.length + " commits"
         for commit in @commits
           div class: "commit", ->
             div class: "meta clearfix", ->
