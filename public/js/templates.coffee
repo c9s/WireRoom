@@ -25,12 +25,6 @@ window.travisMessageTemplate = () ->
     span class: "column compare", ->
       a href: @compare_url, target: "_blank", ->
         span class: "hash", -> @commit.substr(0,5)
-    # span class: "column job", ->
-    #   a target: "_blank", href: @job.url, -> @job.name
-    # span class: "column build", ->
-    #   a target: "_blank", href: @build.url, -> @job.number
-    # span class: "column phase #{ @phase.toLowerCase() }", -> @phase.toCapitalCase()
-    # span class: "column status #{ @status.toLowerCase() }", -> @status.toCapitalCase()
 
 window.jenkinsMessageTemplate = () ->
   div class: "jenkins message clearfix", ->
