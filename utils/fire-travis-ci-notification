@@ -1,0 +1,74 @@
+#!/usr/bin/env perl
+use v5.12;
+use lib 'lib';
+use WireRoom::Message;
+use Git::Hook::PostReceive;
+use HTTP::Request::Common;
+use JSON;
+use YAML;
+
+my $config = YAML::LoadFile "config/testing.yml";
+my $baseUrl = "http://" . $config->{Host};
+$baseUrl .= ":" . $config->{Port} if $config->{Port} && $config->{Port} != 80;
+
+my $payloadText = <<'END';
+{
+  "id": 1,
+  "number": 1,
+  "status": null,
+  "started_at": null,
+  "finished_at": null,
+  "status_message": "Passed",
+  "commit": "62aae5f70ceee39123ef",
+  "branch": "master",
+  "message": "the commit message",
+  "compare_url": "https: //github.com/svenfuchs/minimal/compare/master...develop",
+  "committed_at": "2011-11-11T11: 11: 11Z",
+  "committer_name": "Sven Fuchs",
+  "committer_email": "svenfuchs@artweb-design.de",
+  "author_name": "Sven Fuchs",
+  "author_email": "svenfuchs@artweb-design.de",
+  "repository": {
+    "id": 1,
+    "name": "minimal",
+    "owner_name": "svenfuchs",
+    "url": "http: //github.com/svenfuchs/minimal"
+   },
+  "matrix": [
+    {
+      "id": 2,
+      "repository_id": 1,
+      "number": "1.1",
+      "state": "created",
+      "started_at": null,
+      "finished_at": null,
+      "config": {
+        "notifications": {
+          "webhooks": ["http: //evome.fr/notifications", "http: //example.com/"]
+        }
+      },
+      "status": null,
+      "log": "",
+      "result": null,
+      "parent_id": 1,
+      "commit": "62aae5f70ceee39123ef",
+      "branch": "master",
+      "message": "the commit message",
+      "committed_at": "2011-11-11T11: 11: 11Z",
+      "committer_name": "Sven Fuchs",
+      "committer_email": "svenfuchs@artweb-design.de",
+      "author_name": "Sven Fuchs",
+      "author_email": "svenfuchs@artweb-design.de",
+      "compare_url": "https: //github.com/svenfuchs/minimal/compare/master...develop"
+    }
+  ]
+}
+END
+
+my $payload = decode_json $payloadText;
+my $msg = WireRoom::Message->new( 
+    type    => 'notification.travis-ci',
+    payload => $payload,
+    room    => "Hall"
+);
+$msg->submit( url => "$baseUrl/=/travis-ci/Hall" );
