@@ -1,7 +1,7 @@
-
 vendor(prop, args)
   -webkit-{prop} args
   -moz-{prop} args
+  -o-{prop} args
   {prop} args
 
 border-radius()
@@ -9,3 +9,12 @@ border-radius()
 
 box-shadow()
   vendor('box-shadow', arguments)
+
+text-shadow()
+  vendor('text-shadow', arguments)
+
+transition()
+  vendor('transition', arguments)
+
+transform()
+  vendor('transform', arguments)

@@ -1,14 +1,14 @@
 class window.WRNotificationPanel
-  constructor: (@wireroom, @panel, @options) ->
-    template = ->
-      div class: "notification-panel"
-    @container = $(CoffeeKup.render(template,{}))
-    @container.appendTo(@panel)
+  constructor: (@wireroom, @container, @options) ->
+    @panel = $(CoffeeKup.render(notificationPanelTemplate,{}))
+    @panel.appendTo(@container)
+
+    @messageContainer = @container.find('.notification-panel')
 
     # pretty date updater
 
     setInterval (=>
-      @container.find('.message').each (i,e) ->
+      @messageContainer.find('.message').each (i,e) ->
         t = $(this).data('timestamp')
         $(this).find('.time').html( prettyDate(t) ) if t
     ), 1000
@@ -18,14 +18,14 @@ class window.WRNotificationPanel
       # create notification and append to the panel
       # handle git messages
       content = $(CoffeeKup.render(jenkinsMessageTemplate, data))
-      content.prependTo(@container).data('timestamp', data.timestamp)
+      content.prependTo(@messageContainer).data('timestamp', data.timestamp)
 
     @wireroom.socket.on "notification.github", (data) =>
       return if data.room != @options.room
       # create notification and append to the panel
       # handle git messages
       commitContent = $(CoffeeKup.render(githubCommitTemplate, data))
-      commitContent.prependTo(@container).data('timestamp', data.timestamp)
+      commitContent.prependTo(@messageContainer).data('timestamp', data.timestamp)
         # commitDetailContent = $(CoffeeKup.render(gitCommitDetailTemplate, data))
 
     @wireroom.socket.on "notification.git", (data) =>
@@ -33,7 +33,7 @@ class window.WRNotificationPanel
       # create notification and append to the panel
       # handle git messages
       commitContent = $(CoffeeKup.render(gitCommitTemplate, data))
-      commitContent.prependTo(@container).data('timestamp', data.timestamp)
+      commitContent.prependTo(@messageContainer).data('timestamp', data.timestamp)
       commitContent.popover
         title:   "Commit Detail"
         content: $(CoffeeKup.render(gitCommitDetailTemplate, data))

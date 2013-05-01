@@ -7,10 +7,7 @@ class WRSidePanel
   # @panel the main tab panel
   ###
   constructor: (@wireroom, @panel, @options) ->
-    template = ->
-      div class: "side-panel", ->
-        div class: "handle", ->
-    @container = $(CoffeeKup.render(template,{}))
+    @container = $(CoffeeKup.render(sidePanelTemplate,{}))
     @panel.append @container
     @container.find('.handle').click (e) =>
       @container.toggleClass('show')
@@ -85,6 +82,8 @@ class WRMessageInput
     @messageForm.submit =>
       message = @getMessage()
       nickname = @getNickname()
+      return unless message
+      return unless nickname
       @wireroom.socket.emit "publish",
         "nickname": nickname
         "message": message
@@ -186,7 +185,10 @@ class WireRoom
         room: room
         ident: self.Identifier
         nickname: messageInput.getNickname()
-      @socket.emit "backlog",{room: room, limit: 50}
+      @socket.emit "backlog",{type: "says", room: room, limit: 50}
+      @socket.emit "backlog",{type: "notification.git", room: room, limit: 5}
+      @socket.emit "backlog",{type: "notification.github", room: room, limit: 5}
+      @socket.emit "backlog",{type: "notification.jenkins", room: room, limit: 5}
 
   leaveChannel: (channelName) ->
     self = this
