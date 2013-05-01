@@ -56,10 +56,11 @@ class WRMessageInput
 
     # load nickname from cookie
     if n = $.cookie("wireroom_nickname")
-      @nicknameInput.val(n)
       @nickname = n
+      @nicknameInput.val(@nickname)
     else
       @nickname = "Someone"
+      @nicknameInput.val(@nickname)
 
     self = this
 
