@@ -41,6 +41,10 @@ class WireRoomBacklog
     queue = @queue(room)
     queue.insert(data)
 
+  askType: (room,type,limit) ->
+    queue = @queue(room)
+    return queue.find({ type: type }).limit(limit).sort({ timestamp: -1 })
+
   ask: (room,limit) ->
     queue = @queue(room)
     return queue.find().limit(limit).sort({ timestamp: -1 })
@@ -150,7 +154,7 @@ class WireRoom
       console.log "A socket with sessionID " + socket.handshake.sessionID
 
       socket.on "backlog", (data) ->
-        logs = self.backlog.ask(data.room ,data.limit)
+        logs = if data.type then self.backlog.askType(data.room, data.type, data.limit) else self.backlog.ask(data.room ,data.limit)
         logs.toArray (err,list) ->
           list.reverse()
           for log in list
