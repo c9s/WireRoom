@@ -1,5 +1,7 @@
 
 
+
+
 window.sidePanelTemplate = ->
   div class: "side-panel", ->
     div class: "handle", ->
@@ -9,11 +11,32 @@ window.notificationPanelTemplate = () ->
     h5 "Notification Center"
   div class: "panel-content notification-panel", ->
 
+window.travisMessageTemplate = () ->
+  div class: "travis-ci message clearfix", ->
+    span class: "column icon", ->
+      span class: "icon icon-circle", ->
+    span class: "column type", -> "Travis-CI"
+    span class: "column repo", ->
+      a href: @repository.url, target: "_blank", ->
+        @repository.name
+    span class: "column", -> " at "
+    span class: "column branch", -> @branch
+    span class: "column status #{ @status || "unknown" }" , -> @status_message
+    span class: "column compare", ->
+      a href: @compare_url, target: "_blank", ->
+        span class: "hash", -> @commit.substr(0,5)
+    # span class: "column job", ->
+    #   a target: "_blank", href: @job.url, -> @job.name
+    # span class: "column build", ->
+    #   a target: "_blank", href: @build.url, -> @job.number
+    # span class: "column phase #{ @phase.toLowerCase() }", -> @phase.toCapitalCase()
+    # span class: "column status #{ @status.toLowerCase() }", -> @status.toCapitalCase()
+
 window.jenkinsMessageTemplate = () ->
   div class: "jenkins message clearfix", ->
     span class: "column icon", ->
       span class: "icon icon-cogs", ->
-    span class: "column author", -> "Jenkins"
+    span class: "column type", -> "Jenkins"
     span class: "column job", ->
       a target: "_blank", href: @job.url, -> @job.name
     span class: "column build", ->

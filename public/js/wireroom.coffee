@@ -151,14 +151,6 @@ class WireRoom
     @socket.on "connect", =>
       console.info "socket.io connected."
       @joinChannel(room) for room in self.rooms
-
-      # if we don't have logs, we should ask backlog
-      # XXX: see if we can get backlogs from a snapshot?
-      # return if @socket.hasLogs
-      # @socket.emit("backlog",{room: room, limit: 10})
-      # # we've asked backlogs
-      # @socket.hasLogs = true
-
     @socket.on "disconnect", => console.warn "socket.io disconnected."
 
     notificationCenter = new WRNotificationCenter(self)
@@ -189,6 +181,7 @@ class WireRoom
       @socket.emit "backlog",{type: "notification.git", room: room, limit: 5}
       @socket.emit "backlog",{type: "notification.github", room: room, limit: 5}
       @socket.emit "backlog",{type: "notification.jenkins", room: room, limit: 5}
+      @socket.emit "backlog",{type: "notification.travis-ci", room: room, limit: 5}
 
   leaveChannel: (channelName) ->
     self = this

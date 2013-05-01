@@ -13,20 +13,17 @@ class window.WRNotificationPanel
         $(this).find('.time').html( prettyDate(t) ) if t
     ), 1000
 
-    @wireroom.socket.on "notification.jenkins", (data) =>
-      return if data.room != @options.room
-      # create notification and append to the panel
-      # handle git messages
-      content = $(CoffeeKup.render(jenkinsMessageTemplate, data))
-      content.prependTo(@messageContainer).data('timestamp', data.timestamp)
+    hookNotification = (type, templateHandle) =>
+      @wireroom.socket.on "notification." + type, (data) =>
+        return if data.room != @options.room
+        content = $(CoffeeKup.render(templateHandle, data))
+        content.prependTo(@messageContainer).data('timestamp', data.timestamp)
 
-    @wireroom.socket.on "notification.github", (data) =>
-      return if data.room != @options.room
-      # create notification and append to the panel
-      # handle git messages
-      commitContent = $(CoffeeKup.render(githubCommitTemplate, data))
-      commitContent.prependTo(@messageContainer).data('timestamp', data.timestamp)
-        # commitDetailContent = $(CoffeeKup.render(gitCommitDetailTemplate, data))
+    hookNotification "travis-ci", travisMessageTemplate
+    hookNotification "jenkins", jenkinsMessageTemplate
+    hookNotification "github", githubCommitTemplate
+
+    # commitDetailContent = $(CoffeeKup.render(gitCommitDetailTemplate, data))
 
     @wireroom.socket.on "notification.git", (data) =>
       return if data.room != @options.room

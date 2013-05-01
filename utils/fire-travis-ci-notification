@@ -22,7 +22,7 @@ my $payloadText = <<'END';
   "commit": "62aae5f70ceee39123ef",
   "branch": "master",
   "message": "the commit message",
-  "compare_url": "https: //github.com/svenfuchs/minimal/compare/master...develop",
+  "compare_url": "https://github.com/svenfuchs/minimal/compare/master...develop",
   "committed_at": "2011-11-11T11: 11: 11Z",
   "committer_name": "Sven Fuchs",
   "committer_email": "svenfuchs@artweb-design.de",
