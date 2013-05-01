@@ -109,11 +109,7 @@ class WireRoom
     self = this
     @BootTime = new Date()
     @Identifier = CybozuLabs.SHA1.calc(Math.random().toString() + new Date().getTime())
-
-    console.info "Wireroom Started."
-
     @rooms = @options.rooms or ["Hall"]
-
     @tabs = new UITab($('#channelTabs'))
 
     # XXX: we may use navigator.onLine status to reconnect,
@@ -129,9 +125,6 @@ class WireRoom
 
     @plugins.status        = new WRConnectionStatus(this, $('#connectionStatus') )
     @plugins.channelSearch = new WRChannelSearchInput(this,$('#channelSearch'))
-
-    @hasLogs = false
-
 
     # The unload event is sent to the window element when the user navigates
     # away from the page. This could mean one of many things. 
