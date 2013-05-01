@@ -13,10 +13,11 @@ Requirement
 Features
 --------
 
-* Jenkins Notification Integration
-* GitHub PostReceive Integration
-* Git Commit Notification (for private git repository)
-
+* Notification Center
+  * Jenkins Notification
+  * GitHub PostReceive
+  * Git Commit Notification (for private git repository)
+  * Travis-ci Notification
 
 Supported Browsers
 ------------------
