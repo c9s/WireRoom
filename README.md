@@ -36,8 +36,33 @@ Run
 
     coffee app.coffee
 
-Todo
-----
+Setting Up Hooks
+----------------
 
-- http://about.travis-ci.org/docs/user/notifications/
+### GitHub
+
+Add the post-receive hook:
+
+    http://wireroom.extremedev.org/=/github/:channel
+
+The `:channel` could be `Hall` or the channel name you want.
+
+
+### Jenkins
+
+Install the Jenkins Notification plugin and setup the endpoint at
+
+    http://wireroom.extremedev.org/=/jenkins/:channel
+
+### Travis-CI
+
+Setup the notification in your `.travis-ci.yml` config file:
+
+    notifications:
+      webbooks: http://wireroom.extremedev.org/=/travis-ci/:channel
+
+
+### License
+
+MIT License
 
