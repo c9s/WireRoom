@@ -18,7 +18,12 @@ Features
 * Git Commit Notification (for private git repository)
 
 
-
+Supported Browsers
+------------------
+* iOS6 (iPad or iPhone)
+* Safari
+* Google Chrome
+* FireFox
 
 Installation
 ------------
