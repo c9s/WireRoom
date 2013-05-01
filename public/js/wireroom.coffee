@@ -143,7 +143,6 @@ class WireRoom
     @socket.on "leave", (data) => console.log "leave",data
 
     @socket.on "connect", =>
-      console.info "socket.io connected."
       @joinChannel(room) for room in self.rooms
     @socket.on "disconnect", => console.warn "socket.io disconnected."
 
@@ -187,7 +186,6 @@ class WireRoom
 
 u.ready ->
   wireroom = new WireRoom({})
-
   onUpdateReady = () ->
     console.log('cache update ready.')
   window.applicationCache.addEventListener('updateready', onUpdateReady)
