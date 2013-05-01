@@ -82,6 +82,8 @@ class WRMessageInput
     @messageForm.submit =>
       message = @getMessage()
       nickname = @getNickname()
+      return unless message
+      return unless nickname
       @wireroom.socket.emit "publish",
         "nickname": nickname
         "message": message
