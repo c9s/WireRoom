@@ -26,7 +26,7 @@ class IRCService extends AppService
   stop: () ->
 
 
-class WireRoomBacklog
+class WRBacklog
 
   @services: []
 
@@ -91,7 +91,7 @@ class WireRoom
 
     @db = new mongolian('mongo://127.0.0.1:27017/wireroom')
 
-    @backlog = new WireRoomBacklog(@db)
+    @backlog = new WRBacklog(@db)
 
     RedisStore = require('socket.io/lib/stores/redis')
     @redis  = require('socket.io/node_modules/redis')
